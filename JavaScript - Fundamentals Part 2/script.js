@@ -1,5 +1,5 @@
 'use strict';
-/*
+
 ///Funciones
 function describeCountry(country, population, capitalCity) {
     let pais = `${country} has ${population} millon people and its capital city is ${capitalCity}.`;
@@ -16,7 +16,7 @@ console.log(Brasil);
 
 
 //FUNCTION DECLARATIONS AND FUNCTION EXPRESSIONS
-*/
+
 function percentageOfWorld(population) {
     const worldPopulation = 7900000000;
 
@@ -24,7 +24,7 @@ function percentageOfWorld(population) {
 
     return avgPopulation;
 }
-/*
+
 function percentageOfWorld1(country, population) {
     const worldPopulation = 7900000000;
     let avgPopulation = (population * 100) / worldPopulation;
@@ -68,7 +68,7 @@ function describePopulaton(country, population) {
 }
 
 console.log(describePopulaton("China", 1441000000));
-*/
+
 
 ///COODING CHALLENGE #1 JavaScript Fundamentals – Part 2
 /*
@@ -90,7 +90,7 @@ Hints:
 § To check if number A is at least double number B, check for A >= 2 * B.
 Apply this to the team's average scores 😉
 
-
+*/
 let calcAverage = (score1, score2, score3) => (score1 + score2 + score3) / 3;
 
 
@@ -116,7 +116,7 @@ dolphinsScoreAvg = calcAverage(85, 54, 41);
 koalasScoreAvg = calcAverage(23, 34, 27);
 checkWinner(dolphinsScoreAvg, koalasScoreAvg);
 
-*/
+
 
 ///ARRAYS
 const population = [10000000, 20000000, 30000000, 40000000];
