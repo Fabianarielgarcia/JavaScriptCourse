@@ -129,3 +129,5 @@ if (population.length === 4) {
 
 const percentage = [percentageOfWorld(population[1])];
 console.log(percentage);
+
+console.log('Hellow world');
