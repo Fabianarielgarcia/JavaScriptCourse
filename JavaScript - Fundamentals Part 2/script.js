@@ -152,3 +152,4 @@ change the array at that index position. For example, you can search for
 const neighbours = ['Brasil', 'Uruguay', 'Cuile', 'Paraguay', 'Bolivia'];
 
 console.log(neighbours);
+
