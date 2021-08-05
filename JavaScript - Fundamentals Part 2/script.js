@@ -18,7 +18,7 @@ console.log(Brasil);
 
 */
 //FUNCTION DECLARATIONS AND FUNCTION EXPRESSIONS
-
+/*
 function percentageOfWorld(population) {
     const worldPopulation = 7900000000;
 
@@ -26,6 +26,7 @@ function percentageOfWorld(population) {
 
     return avgPopulation;
 }
+*/
 /*
 function percentageOfWorld1(country, population) {
     const worldPopulation = 7900000000;
@@ -354,7 +355,7 @@ respective BMI. Example: "John's BMI (28.3) is higher than Mark's (23.9)!"
 Test data: Marks weights 78 kg and is 1.69 m tall. John weights 92 kg and is 1.95 m
 tall.
 GOOD LUCK 😀
-*/
+
 
 const mark = {
     firstName: 'Mark',
@@ -388,4 +389,44 @@ if (bmiMark > bmiJohn) {
     console.log(`${mark.firstName}'s BMI (${bmiMark}) is haigher than John's (${bmiJohn})!`);
 } else {
     console.log(`${john.firstName}'s BMI (${bmiJohn}) is haigher than Mark's (${bmiMark})!`);
+}
+*/
+/*
+LECTURE: Iteration: The for Loop
+1. There are elections in your country! In a small town, there are only 50 voters.
+Use a for loop to simulate the 50 people voting, by logging a string like this to
+the console (for numbers 1 to 50): 'Voter number 1 is currently voting'
+
+for (let i = 1; i <= 50; i++) {
+    console.log(`Voter number ${i} is currently voting`);
+}
+*/
+
+/*
+LECTURE: Looping Arrays, Breaking and Continuing
+1. Let's bring back the 'populations' array from a previous assignment
+2. Use a for loop to compute an array called 'percentages2' containing the
+percentages of the world population for the 4 population values. Use the
+function 'percentageOfWorld1' that you created earlier
+3. Confirm that 'percentages2' contains exactly the same values as the
+'percentages' array that we created manually in
+*/
+
+const population = [10000000, 20000000, 30000000, 40000000];
+const percentage2 = [];
+function percentageOfWorld(population) {
+    const worldPopulation = 7900000000;
+
+    let percentage2 = (population * 100) / worldPopulation;
+
+    return percentage2;
+}
+
+for (let i = 0; i < population.length; i++) {
+    percentage2.push(percentageOfWorld(population[i]));
+}
+
+console.log(percentage2);
+if (percentage2.length === population.length) {
+    console.log(`Both arrays have the same length.`)
 }
