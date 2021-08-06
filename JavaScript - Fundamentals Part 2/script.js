@@ -410,7 +410,6 @@ percentages of the world population for the 4 population values. Use the
 function 'percentageOfWorld1' that you created earlier
 3. Confirm that 'percentages2' contains exactly the same values as the
 'percentages' array that we created manually in
-*/
 
 const population = [10000000, 20000000, 30000000, 40000000];
 const percentage2 = [];
@@ -430,3 +429,109 @@ console.log(percentage2);
 if (percentage2.length === population.length) {
     console.log(`Both arrays have the same length.`)
 }
+
+*/
+/*LECTURE: Looping Backwards and Loops in Loops
+1. Store this array of arrays into a variable called 'listOfNeighbours'
+[['Canada', 'Mexico'], ['Spain'], ['Norway', 'Sweden',
+'Russia']];
+2. Log only the neighbouring countries to the console, one by one, not the entire
+arrays. Log a string like 'Neighbour: Canada' for each country
+3. You will need a loop inside a loop for this. This is actually a bit tricky, so don't
+worry if it's too difficult for you! But you can still try to figure this out anyway 😉
+
+const listOfNeighbours = [['Canada', 'Mexico'], ['Spain'], ['Norway', 'Sweden',
+    'Russia']];
+
+for (let i = 0; i < listOfNeighbours.length; i++) {
+    for (let j = 0; j < listOfNeighbours[i].length; j++) {
+        console.log(`Neighbour: ${listOfNeighbours[i][j]}`);
+    }
+}
+*/
+
+/*LECTURE: The while Loop
+1. Recreate the challenge from the lecture 'Looping Arrays, Breaking and Continuing',
+but this time using a while loop (call the array 'percentages3')
+2. Reflect on what solution you like better for this task: the for loop or the while
+loop?
+
+
+const population = [10000000, 20000000, 30000000, 40000000];
+const percentage3 = [];
+let i = 0;
+
+function percentageOfWorld(population) {
+    const worldPopulation = 7900000000;
+
+    let percentage = (population * 100) / worldPopulation;
+
+    return percentage;
+}
+
+while (i < population.length) {
+    percentage3.push(percentageOfWorld(population[i]));
+    i++;
+}
+console.log(percentage3);
+*/
+
+/*Coding Challenge #4
+Let's improve Steven's tip calculator even more, this time using loops!
+Your tasks:
+1. Create an array 'bills' containing all 10 test bill values
+2. Create empty arrays for the tips and the totals ('tips' and 'totals')
+3. Use the 'calcTip' function we wrote before (no need to repeat) to calculate
+tips and total values (bill + tip) for every bill value in the bills array. Use a for
+loop to perform the 10 calculations!
+Test data: 22, 295, 176, 440, 37, 105, 10, 1100, 86 and 52
+Hints: Call ‘calcTip ‘in the loop and use the push method to add values to the
+tips and totals arrays 😉
+Bonus:
+4. Bonus: Write a function 'calcAverage' which takes an array called 'arr' as
+an argument. This function calculates the average of all numbers in the given
+array. This is a difficult challenge (we haven't done this before)! Here is how to
+solve it:
+4.1. First, you will need to add up all values in the array. To do the addition,
+start by creating a variable 'sum' that starts at 0. Then loop over the
+array using a for loop. In each iteration, add the current value to the
+'sum' variable. This way, by the end of the loop, you have all values
+added together
+4.2. To calculate the average, divide the sum you calculated before by the
+length of the array (because that's the number of elements)
+4.3. Call the function with the 'totals' array
+*/
+
+let calcTip = function (bill) {
+    return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+}
+//1
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+
+//2
+const tips = [];
+const totals = [];
+
+//3
+for (let i = 0; i < bills.length; i++) {
+    const tip = calcTip(bills[i]);
+    tips.push(tip);
+    totals.push(bills[i] + tips[i]);
+}
+
+console.log(bills, tips, totals);
+
+//4
+function calcAverage(arr) {
+    let sum = 0;
+    let avg = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    avg = sum / arr.length;
+    return avg;
+}
+
+let avg = calcAverage(totals);
+
+console.log(avg);
