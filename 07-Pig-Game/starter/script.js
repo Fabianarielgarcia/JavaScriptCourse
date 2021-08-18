@@ -69,15 +69,34 @@ btnHold.addEventListener('click', function () {
       changePlayer();
     }
   }
-
-  /*
-  document
-    .querySelector(`.player--${activePlayer}`)
-    .classList.remove('player--active');
-    */
-  /*
-  document
-    .querySelector(`.player--${activePlayer}`)
-    .classList.add('player--active');
-    */
 });
+
+///New game function
+btnNew.addEventListener('click', function () {
+  if (scores[activePlayer] >= 10) {
+    document
+      .querySelector(`.player--${activePlayer}`)
+      .classList.remove('player--winner');
+    initalConditions();
+  } else {
+    currentScore = 0;
+    player0Element.classList.add('player--active');
+    player1Element.classList.remove('player--active');
+  }
+});
+
+const initalConditions = function () {
+  currentScore = 0;
+  activePlayer = 0;
+  score0Element.textContent = 0;
+  score1Element.textContent = 0;
+  diceElement.classList.add('hidden');
+  scorePlayer0.textContent = 0;
+  scorePlayer1.textContent = 0;
+  playing = true;
+  scores[0] = 0;
+  scores[1] = 0;
+  player0Element.classList.add('player--active');
+  player1Element.classList.remove('player--active');
+  console.log(activePlayer);
+};
