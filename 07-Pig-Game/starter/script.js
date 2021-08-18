@@ -12,15 +12,27 @@ const scorePlayer1 = document.querySelector('#current--1');
 const player0Element = document.querySelector('.player--0');
 const player1Element = document.querySelector('.player--1');
 
-let playing = true; ////boolean that check if the game is finnished or not;
-let currentScore = 0;
-const scores = [0, 0];
+let scores, activePlayer, playing, currentScore;
 
-let activePlayer = 0;
-///starting conditions
-score0Element.textContent = 0;
-score1Element.textContent = 0;
-diceElement.classList.add('hidden');
+const init = function () {
+  score0Element.textContent = 0;
+  score1Element.textContent = 0;
+  scorePlayer0.textContent = 0;
+  scorePlayer1.textContent = 0;
+
+  currentScore = 0;
+  activePlayer = 0;
+  playing = true;
+  scores = [0, 0];
+
+  diceElement.classList.add('hidden');
+  player0Element.classList.remove('player--winner');
+  player1Element.classList.remove('player--winner');
+  player0Element.classList.add('player--active'); ///player 0 active player
+  player1Element.classList.remove('player--active'); ///playr 0 active player
+};
+
+init();
 
 ///Switching player function
 const changePlayer = function () {
@@ -72,31 +84,4 @@ btnHold.addEventListener('click', function () {
 });
 
 ///New game function
-btnNew.addEventListener('click', function () {
-  if (scores[activePlayer] >= 10) {
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.remove('player--winner');
-    initalConditions();
-  } else {
-    currentScore = 0;
-    player0Element.classList.add('player--active');
-    player1Element.classList.remove('player--active');
-  }
-});
-
-const initalConditions = function () {
-  currentScore = 0;
-  activePlayer = 0;
-  score0Element.textContent = 0;
-  score1Element.textContent = 0;
-  diceElement.classList.add('hidden');
-  scorePlayer0.textContent = 0;
-  scorePlayer1.textContent = 0;
-  playing = true;
-  scores[0] = 0;
-  scores[1] = 0;
-  player0Element.classList.add('player--active');
-  player1Element.classList.remove('player--active');
-  console.log(activePlayer);
-};
+btnNew.addEventListener('click', init);
