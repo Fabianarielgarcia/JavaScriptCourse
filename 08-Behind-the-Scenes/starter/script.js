@@ -120,6 +120,7 @@ function calcAge(birthyear) {
 const firstName = 'Fabian';
 */
 
+/*
 ///What happens when we redefine a variable from a parent scope inside of a inner scope?
 ///We are in the printAge scope. At the beginning, we have the output variable. Then we have an inner scope, where we redefine the output variable from the outer scope
 function calcAge(birthyear) {
@@ -153,3 +154,44 @@ function calcAge(birthyear) {
 }
 
 const firstName = 'Fabian';
+*/
+
+///This key word in practice
+console.log(this); ///is simply the window object
+
+/*
+//declare function
+const calcAge = function (birthyear) {
+  console.log(2037 - birthyear);
+  console.log(this); ///undefined: this takes this value because of the'strict mode'
+};
+
+calcAge(1988);
+*/
+
+/*
+///arrow function
+const calcAge = birthyear => {
+  console.log(2037 - birthyear);
+  console.log(this); ///window object. Arrow function does not get its own keyword. it simply uses the lexical keyword (the keyword of its parent function or scope, in this case, the window object)
+};
+
+calcAge(1988);
+*/
+
+const fabian = {
+  year: 1988,
+  calcAge: function () {
+    console.log(this); //fabian object
+    console.log(2037 - this.year);
+  },
+};
+
+fabian.calcAge();
+
+const matilda = {
+  year: 2017,
+};
+
+matilda.calcAge = fabian.calcAge; ///method borrowing
+matilda.calcAge(); ///this keyword points to the ibject that is calling the mothod, in this case, matilda
