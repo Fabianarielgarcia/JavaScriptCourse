@@ -120,6 +120,7 @@ function calcAge(birthyear) {
 const firstName = 'Fabian';
 */
 
+/*
 ///What happens when we redefine a variable from a parent scope inside of a inner scope?
 ///We are in the printAge scope. At the beginning, we have the output variable. Then we have an inner scope, where we redefine the output variable from the outer scope
 function calcAge(birthyear) {
@@ -153,3 +154,156 @@ function calcAge(birthyear) {
 }
 
 const firstName = 'Fabian';
+*/
+
+///This key word in practice
+//console.log(this); ///is simply the window object
+
+/*
+//declare function
+const calcAge = function (birthyear) {
+  console.log(2037 - birthyear);
+  console.log(this); ///undefined: this takes this value because of the'strict mode'
+};
+
+calcAge(1988);
+*/
+
+/*
+///arrow function
+const calcAge = birthyear => {
+  console.log(2037 - birthyear);
+  console.log(this); ///window object. Arrow function does not get its own keyword. it simply uses the lexical keyword (the keyword of its parent function or scope, in this case, the window object)
+};
+
+calcAge(1988);
+*/
+
+/*
+const fabian = {
+  year: 1988,
+  calcAge: function () {
+    console.log(this); //fabian object
+    console.log(2037 - this.year);
+  },
+};
+
+fabian.calcAge();
+
+const matilda = {
+  year: 2017,
+};
+
+matilda.calcAge = fabian.calcAge; ///method borrowing
+matilda.calcAge(); ///this keyword points to the ibject that is calling the mothod, in this case, matilda
+*/
+
+///this keyword in arrow functions and regular functions
+/*
+const fabian = {
+  firstname: 'Fabian',
+  year: 1988,
+  calcAge: function () {
+    console.log(this);
+    console.log(2037 - this.year);
+  },
+
+  greet: () => console.log(`Hey ${this.firstName}`),
+};
+
+fabian.greet(); ///output --> Hey undefined
+//This happens because arrow functions do not get their own this keyword. It will simply use the yhis keyword from its surroundings (the global scope in this case). 
+*/
+/*
+var firstName = 'Matilda';
+const fabian = {
+  firdtname: 'Fabian',
+  year: 1988,
+  calcAge: function () {
+    console.log(this);
+    console.log(2037 - this.year);
+  },
+
+  greet: () => {
+    console.log(`Hey ${this.firstName}`);
+  },
+};
+
+fabian.greet(); ///output --> Hey Matilda
+//This happens because arrow functions do not get their own this keyword. It will simply use the yhis keyword from its surroundings (var firstName). That is why, although fabian is calling the method, it prints "Hey Matilda".
+*/
+/*
+const fabian = {
+  firstname: 'Fabian',
+  year: 1988,
+  calcAge: function () {
+    console.log(2037 - this.year);
+
+    const isMillenial = function () {
+      console.log(this.year >= 1981 && this.year <= 1996);
+    };
+
+    isMillenial();
+  },
+
+  greet: () => {
+    console.log(`Hey ${this.firstName}`); ///Hey undefined
+  },
+};
+
+fabian.greet();
+fabian.calcAge();
+*/
+
+////Primitives vs Object in Practice
+///changing primitive values in the call stack
+///Primitive types
+let lastName = 'William';
+let oldLastName = lastName;
+lastName = 'Davis';
+
+console.log(lastName, oldLastName);
+
+////changing values of an object
+
+///Reference types
+const Jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+};
+
+const marriedJessica = Jessica; ///just another variable in the stack pointing to the same memory address of the heap
+marriedJessica.lastName = 'Davis';
+///both objects have the same lastName because both have the same memory address reference
+//console.log('Before marriage:', Jessica);
+//console.log('After marriage:', marriedJessica);
+/*
+////How do I solve this?
+///Changing objects
+const Jessica2 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+};
+
+const jessicaCopy = Object.assign({}, Jessica2);
+jessicaCopy.lastName = 'Davis';
+console.log('Before marriage:', Jessica2);
+console.log('After marriage:', jessicaCopy); ///A real copy of the original in  a new object
+*/
+///Problems with Object.assign
+///Both object have 4 family members when that is not the case. ONE SOLUTION TO THIS PROBLEM WOULD BE TO USE AN EXTERNAL LIBRARY CALLED LO-DASH BUT THIS WILL BE SEEN LATER ON THE COURSE
+const Jessica2 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Bob', 'Alice'],
+};
+
+const jessicaCopy = Object.assign({}, Jessica2); ///A shallow solution. It does not work for objects within an object
+jessicaCopy.lastName = 'Davis';
+
+jessicaCopy.family.push('Mary', 'John');
+console.log('Before marriage:', Jessica2);
+console.log('After marriage:', jessicaCopy);
