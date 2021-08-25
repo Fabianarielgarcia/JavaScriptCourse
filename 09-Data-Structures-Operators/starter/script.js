@@ -26,8 +26,79 @@ const restaurant = {
   order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`
+    );
+  },
 };
 
+///THE SPREAD OPERATOR
+///We can use the spread operator to basically expand an array into all its elements
+
+///What happens if we want to create a new array based on this array but with new elements at the beginning
+const arr = [7, 8, 9];
+
+/*we could do:
+const newArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(newArr);
+*/
+
+///Using the spread operator
+const newArr = [1, 2, ...arr];
+console.log(newArr); ///---> [1, 2 ,7, 8 ,9]
+console.log(...newArr); ///it logs the individual elements of the array
+
+/***THE BIG DIFFERENCE BETWEEN THE SPREAD OPERATOR AND DESTRUCTURING IS THAT THE SPREAD OPERATOR TAKES ALL THE ELEMENTS FROM THE ARRAY AND IT ALSO DOES NOT CREATE NEW VARIABLES. AS A CONSEQUENCE, WE CAN ONLY USE IT IN PLACES WHERE WE WOULD OTHERWISE WRITE VALUES SEPARATED BY COMMAS.
+ */
+
+///1) Copy array.
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(mainMenuCopy);
+
+///2) Join 2 arrays
+const newMenu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(newMenu);
+
+///The spread operator works on all iterables. Iterables are arrays, strings, maps, sets, NOT OBJECTS
+
+const str = 'Fabian';
+const letters = [...str];
+console.log(letters);
+
+///Write a function that accepts multiple arguments and the use the spread operator to actually pass those argumments
+
+const ingredients = [
+  prompt("Let's make pasta! Ingrediente 1?"),
+  prompt('Ingrediente 2?'),
+  prompt('Ingrediente 3?'),
+];
+
+console.log(ingredients);
+
+restaurant.orderPasta(...ingredients);
+
+///Since  ES 2018, the spread operator also works on objects
+
+///Objects
+///Lets create a new restaurant with the original data plus some additional data
+
+const newRestaurant = { founding: 1998, ...restaurant, founder: 'Fabian' };
+
+console.log(newRestaurant);
+
+///Copy an object
+const restaurantCopy = { ...restaurant };
+
+///changing the name of the copy restaurant
+restaurantCopy.name = 'La Piazzeta';
+
+console.log(restaurantCopy.name);
+console.log(restaurant.name);
+/*If we do this
+const newArr = [1, 2, arr];
+console.log(newArr); ---> [1, 2, Array(3)]
 ///DESTRUCTURING OBJECTS
 //To destructure an object we use "{}". Then we provide the variable names that exactly match the property names that we want to retrieve from the object. We do not have to forget that in an ovject the order of the properties do not matter
 
