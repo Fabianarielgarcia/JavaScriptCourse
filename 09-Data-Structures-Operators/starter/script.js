@@ -32,27 +32,57 @@ const restaurant = {
       `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`
     );
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 
+///REST PATTERNS AND REST PARAMETERS
+/** The rest patter has the same look as the spread operator but it does exactly the opposite. The rest pattern is used to collect multiple elements and condense them into an array*/
+
+//1) Destructuring
+///SPREAD, because on RIGHT side of =
+const arr = [1, 2, ...[3, 4]];
+
+///REST, because on LEFT side of = . As the rest pattern does not skipped any element, so, for that reason, the rest patter always must be the last in  the destructuring assignment because otherwise how will JavaScript know until when it should collect the rest of the array. For the same reason, there can only be one rest pattern in any destructuring assignment.
+const [a, b, ...others] = [1, 2, 3, 4, 3];
+console.log(a, b, others);
+
+const [pizza, , rissotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, rissotto, otherFood);
+
+///Rest pattern in objects
+const { sat, ...weekDays } = restaurant.openingHours;
+console.log(sat, weekDays);
+
+///2) funcionas
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+
+restaurant.orderPizza('mushrooms');
 ///THE SPREAD OPERATOR
 ///We can use the spread operator to basically expand an array into all its elements
 
 ///What happens if we want to create a new array based on this array but with new elements at the beginning
-const arr = [7, 8, 9];
+//const arr = [7, 8, 9];
 
-/*we could do:
-const newArr = [1, 2, arr[0], arr[1], arr[2]];
-console.log(newArr);
-*/
+//we could do:
+//const newArr = [1, 2, arr[0], arr[1], arr[2]];
+//console.log(newArr);
 
+/*
 ///Using the spread operator
 const newArr = [1, 2, ...arr];
 console.log(newArr); ///---> [1, 2 ,7, 8 ,9]
 console.log(...newArr); ///it logs the individual elements of the array
-
+*/
 /***THE BIG DIFFERENCE BETWEEN THE SPREAD OPERATOR AND DESTRUCTURING IS THAT THE SPREAD OPERATOR TAKES ALL THE ELEMENTS FROM THE ARRAY AND IT ALSO DOES NOT CREATE NEW VARIABLES. AS A CONSEQUENCE, WE CAN ONLY USE IT IN PLACES WHERE WE WOULD OTHERWISE WRITE VALUES SEPARATED BY COMMAS.
  */
-
+/*
 ///1) Copy array.
 const mainMenuCopy = [...restaurant.mainMenu];
 console.log(mainMenuCopy);
@@ -96,6 +126,8 @@ restaurantCopy.name = 'La Piazzeta';
 
 console.log(restaurantCopy.name);
 console.log(restaurant.name);
+
+*/
 /*If we do this
 const newArr = [1, 2, arr];
 console.log(newArr); ---> [1, 2, Array(3)]
@@ -190,3 +222,5 @@ console.log(p, q, r); ///we get r = undefined because one of the arrays have onl
 const [c = 1, d = 1, f = 1] = [8, 9];
 console.log(c, d, f); ///we get c=8, d= 9, f=1
 */
+
+//*FINAL CONCLUSION: THE SPREAD AND THE REST SYNTAX BOTH LOOK EXACTLY THE SAME BUT THEY WORK IN OPPOSITE WAYS DEPENDING ON WHERE THEY ARE USED. tHE SPREAD OPERATOR IS USED WHERE WE WOULD OTHERWISE WRITE VALUES, SEPARATEDBY A COMMA. ON THE OTHER HAND, THE RREST PATTERN IS BASICALLY USED WHERE WE WOULD OTHERWISE WRITE VARIABLE NAMES SEPARATED BY COMMAS AND NOT VALUES SEPARATED BY COMMAS*/
