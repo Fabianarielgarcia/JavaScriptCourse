@@ -34,6 +34,58 @@ const restaurant = {
   },
 };
 
+<<<<<<< Updated upstream
+=======
+/**We can use the && and || operators for short circuiting. Logical operators can use any data type and they can return any data type. In the case of the or operator, short-circuiting means that if the first value is a trurhy value, then the other operand will not even be avaluated and it will immediately return that first value.*/
+console.log('----OR-->SHORT-CIRCUITING-----');
+console.log(33 || 'Fabian');
+console.log('' || 'Fabian');
+console.log(true || '0');
+console.log(undefined || null);
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+/**When it comes to short-circuiting, the AND operator works in the opposite way of the or operator. The and operator short circuits when the first value is falsy. Then immediately returns that falsy value without even evaluating the second operand*/
+console.log('----&&-->SHORT-CIRCUITING-----');
+
+console.log(0 && 'Fabian');
+console.log(7 && 'Fabian');
+console.log(7 && 'Fabian' && null && undefined && 0);
+
+///practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+
+///REST PATTERNS AND REST PARAMETERS
+/** The rest patter has the same look as the spread operator but it does exactly the opposite. The rest pattern is used to collect multiple elements and condense them into an array*/
+/*
+//1) Destructuring
+///SPREAD, because on RIGHT side of =
+const arr = [1, 2, ...[3, 4]];
+
+///REST, because on LEFT side of = . As the rest pattern does not skipped any element, so, for that reason, the rest patter always must be the last in  the destructuring assignment because otherwise how will JavaScript know until when it should collect the rest of the array. For the same reason, there can only be one rest pattern in any destructuring assignment.
+const [a, b, ...others] = [1, 2, 3, 4, 3];
+console.log(a, b, others);
+
+const [pizza, , rissotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, rissotto, otherFood);
+
+///Rest pattern in objects
+const { sat, ...weekDays } = restaurant.openingHours;
+console.log(sat, weekDays);
+
+///2) funcionas
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+
+restaurant.orderPizza('mushrooms');
+*/
+
+>>>>>>> Stashed changes
 ///THE SPREAD OPERATOR
 ///We can use the spread operator to basically expand an array into all its elements
 
