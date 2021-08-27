@@ -32,6 +32,11 @@ const restaurant = {
       `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`
     );
   },
+
+   orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 */
 /**We can use the && and || operators for short circuiting. Logical operators can use any data type and they can return any data type. In the case of the or operator, short-circuiting means that if the first value is a trurhy value, then the other operand will not even be avaluated and it will immediately return that first value.*/
