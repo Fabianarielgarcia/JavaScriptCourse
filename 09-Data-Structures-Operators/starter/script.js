@@ -353,7 +353,11 @@ console.log(team1, draw, team2);
 
 ///6
 const printGoals = function (players) {
-  console.log(players);
+  const array = [];
+  array.push(players);
+  const cantGoals = array.length;
+  console.log(array);
+  console.log(`Cantidad de goles : ${cantGoals}`);
 };
 
-printGoals(...game.score);
+printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
