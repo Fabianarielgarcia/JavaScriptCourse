@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
@@ -37,7 +37,7 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
-
+*/
 /**We can use the && and || operators for short circuiting. Logical operators can use any data type and they can return any data type. In the case of the or operator, short-circuiting means that if the first value is a trurhy value, then the other operand will not even be avaluated and it will immediately return that first value.*/
 
 /*
@@ -376,6 +376,7 @@ game.odds.team1 > game.odds.team2 &&
 ///if the first agument of line 373 is false, nothing is printed and pass to the next line of the code.
 */
 
+/*
 ///FOR-OF LOOP
 
 const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
@@ -399,3 +400,48 @@ for (const item of menu.entries()) {
 for (const [i, element] of menu.entries()) {
   console.log(`${i + 1}: ${element}`);
 }
+*/
+
+///ES6 INTRODUCED THREE WAYS, WHICH MAKE IT EASIER TO WRITE OBJECT LITERALS LIKE THE RESTAURANT OBJECT
+
+const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+  ///1) ES6 enheance object literals. We can add an object without having to assign it to a variable -->openingHours = openingHours
+  openingHours,
+
+  /// 2) we do not have to create a property and then set it to a function expression. We get rid of the keyword function and the semicolon
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`
+    );
+  },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
+};
