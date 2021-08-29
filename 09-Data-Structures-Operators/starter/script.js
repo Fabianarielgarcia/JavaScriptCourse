@@ -329,18 +329,18 @@ const game = {
   },
 };
 
-///1
+///1: Destructuring game.players
 const [players1, players2] = game.players;
 console.log(players1);
 console.log(players2);
 
 ///2
-const [gk, ...fieldPlayers] = game.players[0];
+const [gk, ...fieldPlayers] = game.players[0]; ///or players1;
 console.log(gk);
 console.log(fieldPlayers);
 
 ///3
-const allPlayers = [...game.players[0], ...game.players[1]];
+const allPlayers = [...game.players[0], ...game.players[1]]; ///or [...players1, ...players2]
 console.log(allPlayers);
 
 ///4
@@ -351,13 +351,27 @@ console.log(players1Final);
 const { team1, x: draw, team2 } = game.odds;
 console.log(team1, draw, team2);
 
+/*Solution 2
+const{ odds: {team1, x: draw, team2}} = game;
+console.log(team1, draw, team2);
+*/
+
 ///6
-const printGoals = function (players) {
-  const array = [];
-  array.push(players);
-  const cantGoals = array.length;
-  console.log(array);
+const printGoals = function (...players) {
+  for (let i = 0; i < players.length; i++) {
+    console.log(players[i]);
+  }
+
+  const cantGoals = players.length;
   console.log(`Cantidad de goles : ${cantGoals}`);
 };
 
+///printGoals(...game.scored);
 printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+
+//7
+game.odds.team1 < game.odds.team2 &&
+  console.log('Team 1 is more likely to win'); ///if (game.odds.team1 < game.odds.team2 ) === true, then ('Team 1 is more likely to win') is printed
+game.odds.team1 > game.odds.team2 &&
+  console.log('Team 2 is more likely to win');
+///if the first agument of line 373 is false, nothing is printed and pass to the next line of the code.
