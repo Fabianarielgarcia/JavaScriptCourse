@@ -445,3 +445,37 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
+
+///OPTIONAL CAHINING
+///ES2020 introduced afeature called optional chaining. With optional chaining if a certain property does not exist, then undefined is returned immediately.
+
+///checking if restaurant has a property called openingHours adn if it does open on mondays
+if (restaurant.openingHours && restaurant.openingHours.mon)
+  console.log(restaurant.openingHours.mon.open);
+
+///console.log(restaurant.openingHours.mon.open);///error: cannot read property 'open' of undefined
+///with optional chaining
+///only if the property that is before this question mark exists (if it is not null or undefined...if its 0 or '' then still exits), then the open property will be read from there. But if not, then immediately undefined will be returned
+
+console.log(restaurant.openingHours.mon?.open);
+
+////We can have multiple optional chainings
+console.log(restaurant.openingHours?.mon?.open);
+
+///a more resl example
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+  //console.log(day);
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+///optional chaining in methods for checking if a method exits before call it
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderRissotto?.(0, 1) ?? 'Method does not exist');
+
+////optional chaining in arrays
+const users = [{ name: 'fabian', email: 'fabian@hello.ar' }];
+console.log(users[0]?.name ?? 'Users array empty');
