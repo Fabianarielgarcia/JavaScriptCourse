@@ -1,6 +1,5 @@
 'use strict';
 
-/*
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
@@ -33,12 +32,12 @@ const restaurant = {
     );
   },
 
-   orderPizza: function (mainIngredient, ...otherIngredients) {
+  orderPizza: function (mainIngredient, ...otherIngredients) {
     console.log(mainIngredient);
     console.log(otherIngredients);
   },
 };
-*/
+
 /**We can use the && and || operators for short circuiting. Logical operators can use any data type and they can return any data type. In the case of the or operator, short-circuiting means that if the first value is a trurhy value, then the other operand will not even be avaluated and it will immediately return that first value.*/
 
 /*
@@ -286,7 +285,7 @@ team is more likely to win, without using an if/else statement or the ternary
 operator.
 Test data for 6.: First, use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'.
 Then, call the function again with players from game.scored
-GOOD LUCK 😀 */
+GOOD LUCK 😀 
 
 const game = {
   team1: 'Bayern Munich',
@@ -351,10 +350,10 @@ console.log(players1Final);
 const { team1, x: draw, team2 } = game.odds;
 console.log(team1, draw, team2);
 
-/*Solution 2
-const{ odds: {team1, x: draw, team2}} = game;
-console.log(team1, draw, team2);
-*/
+//Solution 2
+//const{ odds: {team1, x: draw, team2}} = game;
+///console.log(team1, draw, team2);
+
 
 ///6
 const printGoals = function (...players) {
@@ -375,3 +374,28 @@ game.odds.team1 < game.odds.team2 &&
 game.odds.team1 > game.odds.team2 &&
   console.log('Team 2 is more likely to win');
 ///if the first agument of line 373 is false, nothing is printed and pass to the next line of the code.
+*/
+
+///FOR-OF LOOP
+
+const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+
+///THIS LOOP WILL AUTOMATICALLY LOOP OVER THE ENTIRE ARRAY AND IN EACH ITERATION, IT WILL GIVE US ACCESS TO THE CURRENT ARRAY ELEMENT, WHICH WE SPECIFY AS "ITEM" IN THIS EXAMPLE. WITH THE FOR OF LOOP, WE DO NOT HAVE TO WORRY ABOUT ALL THE UNDERLYING DETAILS SUCH AS COUNTERS AND CONDITIONS. WHAT´S ALSO GREAT ABOUT THE FOR-OF LOOP, IS THAT WE CAN STILL USE THE CONTINUE AND BREAK KEYWORDS.
+for (const item of menu) console.log(item);
+
+///What if we also want the current inde and not just the current element?
+for (const item of menu.entries()) {
+  console.log(item);
+}
+//console.log([...menu.entries()]);
+///menu.entries() is an array which in each position contains a new array, which contains the element, so the element entity index number of that element in the original array.
+
+///Printed in a better and cool way
+for (const item of menu.entries()) {
+  console.log(`${item[0] + 1}: ${item[1]}`);
+}
+
+///We can also improve last example by destructuring the item  array
+for (const [i, element] of menu.entries()) {
+  console.log(`${i + 1}: ${element}`);
+}
