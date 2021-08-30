@@ -446,6 +446,7 @@ const restaurant = {
   },
 };
 
+/*
 ///OPTIONAL CAHINING
 ///ES2020 introduced afeature called optional chaining. With optional chaining if a certain property does not exist, then undefined is returned immediately.
 
@@ -479,3 +480,29 @@ console.log(restaurant.orderRissotto?.(0, 1) ?? 'Method does not exist');
 ////optional chaining in arrays
 const users = [{ name: 'fabian', email: 'fabian@hello.ar' }];
 console.log(users[0]?.name ?? 'Users array empty');
+
+*/
+
+///LOOPING OBJECTS: OBJECT KEYS, VALUES AND ENTRIES
+
+///Property NAMES
+const properties = Object.keys(openingHours);
+console.log(properties);
+let openStr = `We are open on ${properties.length} days: `;
+
+for (const day of properties) {
+  openStr += `${day},`;
+}
+console.log(openStr);
+
+///Property VALUES
+const values = Object.values(openingHours);
+console.log(values);
+
+///Looping over the entire object
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
+}
