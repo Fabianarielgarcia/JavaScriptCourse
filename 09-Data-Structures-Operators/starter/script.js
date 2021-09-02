@@ -533,7 +533,7 @@ Lewandowski: 2
 }
 GOOD LUCK 😀
 */
-
+/*
 ///1
 const entries = Object.entries(game.scored);
 //console.log(entries);
@@ -541,10 +541,10 @@ for (const [index, value] of entries) {
   console.log(`Goal ${Number(index) + 1}: ${value}`);
 }
 
-/*TEACHER´S SOLUTION
+///TEACHER´S SOLUTION
 
-for(const [i, player] of game.scored.entries()) console.log(`Goal ${i + 1}: ${player}`);
-*/
+//for(const [i, player] of game.scored.entries()) console.log(`Goal ${i + 1}: ${player}`);
+
 //2
 const oddsData = Object.entries(game.odds);
 console.log(oddsData);
@@ -556,17 +556,16 @@ for (const [key, value] of oddsData) {
 let prom = sum / oddsData.length;
 console.log(prom);
 
-/*TEACHER´S SOLUTION
-let average = 0;
-const odds = Object.values(game.odds);
+///TEACHER´S SOLUTION
+//let average = 0;
+//const odds = Object.values(game.odds);
 
-for(const odd of Object.values(game.odds)){
-  average += odd;
-}
-average /= odds.length;
-console.log(average);
+//for(const odd of Object.values(game.odds)){
+  //average += odd;
+//}
+//average /= odds.length;
+//console.log(average);
 
-*/
 ///3
 for (const [key, value] of oddsData) {
   if (key === 'team1') {
@@ -577,13 +576,12 @@ for (const [key, value] of oddsData) {
     console.log(`Odd of victory Borrussia Dortmund: ${value}`);
   }
 }
-/*TEACHER'S SOLUTION
-for(const {team, odd} of Object.entries(game.odds)){
-  const teamStr = team === 'x' ? 'draw' : 'victory ${game[team]};
-  console.log(`Odd of ${teamStr} ${odd});
-}
+///TEACHER'S SOLUTION
+//for(const {team, odd} of Object.entries(game.odds)){
+ // const teamStr = team === 'x' ? 'draw' : 'victory ${game[team]};
+ // console.log(`Odd of ${teamStr} ${odd});
+//}
 
-*/
 
 //4
 
@@ -594,9 +592,98 @@ for (const player of game.scored) {
 }
 console.log(scorers);
 
-/*const goals = Object.entries(game.scored);
-for (const [key, value] of goals) {
-  const array = [];
-  array.push(value);
-}
+*/
+
+/*
+///SET
+///Collection that not accept duplicate values. It looks like an array. There are not key value pairs,it´s just a bunch of values grouped together. Sets are also iterables. Sets are different from an array. First, because its elements are unique, and second, because the oreder of elements in the set is irrelevant.
+
+const orderSet = new Set(['Pasta', 'Pizza', 'Pizza', 'Rissotto', 'Pasta']);
+console.log(orderSet);
+
+console.log(new Set('Fabian'));
+
+///get the size of a set
+console.log(orderSet.size);
+
+///check if a certain element is on a set
+console.log(orderSet.has('Pizza')); ///true
+console.log(orderSet.has('Bread')); ///false
+
+///add elelements to a set
+orderSet.add('Garlic Bread');
+
+console.log(orderSet);
+
+///delete elements on a set
+orderSet.delete('Rissotto');
+
+console.log(orderSet);
+
+///delete all of the elements of a set
+///orderSet.clear();
+
+///iterate on a set
+
+for (const order of orderSet) console.log(order);
+
+///In a normal code base, the main use case of sets is actually to remove duplicate values of arrays. Example
+
+const staff = ['Waiter', 'Cheff', 'Waiter', 'Manager', 'Cheff', 'Waiter'];
+
+///we unpack the new set using the spread operator and then these elements will be put into the new constructed array
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+*/
+
+///MAPS: FUNDAMENTALS
+///A map is a data structure that we can use to map values to keys. Data is stored in key value pairs in maps. The big difference between objects and maps is that in maps, the keys can have any type and this can be huge. so, in objects, the keys are basically always strings. But in maps, we can have any type of key. It could even be objects, or arrays, or other maps.
+
+/*
+const rest = new Map();
+
+///Introduce data in a map. First--->key, second---->value
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Firenzze, Italy');
+rest.set(2, 'Lisbon, Portugal');
+
+console.log(rest);
+
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are close');
+
+///read data from a map
+console.log(rest.get('name'));
+console.log(rest.get(true));
+
+const time = 8;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+///check if a map contains a certain key
+console.log(rest.has('categories'));
+
+///delete a key
+rest.delete(2);
+console.log(rest);
+
+///size property in maps
+console.log(rest.size);
+
+///delete all elements
+//rest.clear();
+
+rest.set([1, 2], 'Test');
+console.log(rest);
+
+console.log(rest.get([1, 2])); ///output--> undefined. This happens because although the arrays are identical, they are different objects in the heap. In order to make it work, we have to create an array and pass it as a variable
+
+const array = [1, 2];
+rest.set(array, 'Test');
+console.log(rest.get(array));
+
+rest.set(document.querySelector('h1', 'Headline'));
 */
