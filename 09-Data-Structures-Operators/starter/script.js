@@ -687,3 +687,45 @@ console.log(rest.get(array));
 
 rest.set(document.querySelector('h1', 'Headline'));
 */
+
+///MAPS: ITERATION
+
+///There´s another way of populating a map without having to use the set method
+
+const question = new Map([
+  ['question', 'What is the best programming in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct'],
+  [false, 'try it again'],
+]);
+
+console.log(question);
+
+///There is an easy way to convert from objects to maps
+const hoursMap = new Map(Object.entries(openingHours));
+
+console.log(hoursMap);
+
+///for loop in maps
+
+for (const [key, value] of question) {
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+
+const answer = Number(prompt('Your answer'));
+console.log(answer);
+
+answer != 3
+  ? console.log(question.get(false))
+  : console.log(question.get(true));
+
+///teacher's solution
+///console.log(question.get(question.get('correct') === answer));
+
+///Sometimes we need to convert a map back into an array.
+console.log([...question]);
