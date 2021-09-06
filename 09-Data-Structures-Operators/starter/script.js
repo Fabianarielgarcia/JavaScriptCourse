@@ -687,7 +687,7 @@ console.log(rest.get(array));
 
 rest.set(document.querySelector('h1', 'Headline'));
 */
-
+/*
 ///MAPS: ITERATION
 
 ///There´s another way of populating a map without having to use the set method
@@ -729,3 +729,80 @@ answer != 3
 
 ///Sometimes we need to convert a map back into an array.
 console.log([...question]);
+*/
+
+///WHICH DATA STRUCTURE TO USE AND WHEN SHOULD I USE IT?
+///First decition: Do we need a simple list of values? If so, we are going to use an array or a set. On the oder hand, if we need key value pairs, then we need an object or a map. With a key values pair, we have a way of discribing the values, so by using the key. On the other hand, in a list like an array or a set, we simply have the values without any description.
+///ARRAY VS SET: We use arrays whenever we need to store values in order and when these values might contain duplicates. Also, we dhould always use arrays when we need to manipulate data becasuse there are a ton of useful array methods. Sets should be used when we are working with unique values. Besides that, we should use sets when high performance is really important, because operations like searching for an item or deleting an item from a set can be up to 10 times faster in sets than in arrays
+
+///OBJECTS VS MAPS:Maps are way better suited for simple key value stores because thet offer better perfrmance in fact. Also map keys can have any data type, are easy to iterate amd it's easy to compute the size of a map. The biggest advantage of objects is probably how easy it is to write them and to access data by simply using the dot or the brackets operator. We should use maps when we simply need to map keys to values and also when we need keys that are not strings. Then, if we need functions as values, then we should absolutely use an object for that
+
+///CODING CHALLENGE #3
+/*Let's continue with our football betting app! This time, we have a map called
+'gameEvents' (see below) with a log of the events that happened during the
+game. The values are the events themselves, and the keys are the minutes in which
+each event happened (a football game has 90 minutes plus some extra time).
+Your tasks:
+1. Create an array 'events' of the different game events that happened (no
+duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64
+was unfair. So remove this event from the game events log.
+3. Compute and log the following string to the console: "An event happened, on
+average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over 'gameEvents' and log each element to the console, marking
+whether it's in the first half or second half (after 45 min) of the game, like this:
+[FIRST HALF] 17:
+⚽
+GOAL
+GOOD LUCK 😀
+*/
+const gameEvents = new Map([
+  [17, '⚽ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽ GOAL'],
+  [80, '⚽ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+///1
+const setEvents = new Set();
+for (const [key, value] of gameEvents) {
+  setEvents.add(value);
+}
+
+const arrEvents = [...setEvents];
+console.log(arrEvents);
+
+///TEACHER'S SOLUTION
+///const events = [...new Set(gameEvents.values())]
+///console.log(events);
+
+///2
+gameEvents.delete(64);
+console.log(gameEvents);
+
+///3
+const time = [...gameEvents.keys()].pop();
+///console.log(time);
+console.log(`An event happened, on
+average, every ${time / gameEvents.size} minutes`);
+
+///4
+
+for (const [key, value] of gameEvents) {
+  key < 45
+    ? console.log(`[FIRST HALF] ${key}: ${value}`)
+    : console.log(`[SECOND HALF] ${key}: ${value}`);
+}
+
+///TEACHER'S SOLUTION
+///const hlaf = min <= 45 ? 'FIRST' : 'SECOND';
+///    for(const [key, value] of gameEvents){
+///      console.log(`[${half} HALF] ${min}: ${event}`)
+///   }
