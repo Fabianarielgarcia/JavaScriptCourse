@@ -756,6 +756,7 @@ whether it's in the first half or second half (after 45 min) of the game, like t
 GOAL
 GOOD LUCK 😀
 */
+/*
 const gameEvents = new Map([
   [17, '⚽ GOAL'],
   [36, '🔁 Substitution'],
@@ -806,3 +807,34 @@ for (const [key, value] of gameEvents) {
 ///    for(const [key, value] of gameEvents){
 ///      console.log(`[${half} HALF] ${min}: ${event}`)
 ///   }
+*/
+////WORKING WITH STRINGS
+const airline = 'TAP Air Argentina';
+const plane = 'A320';
+
+///get the character of a string at a certain position
+console.log(plane[0]);
+console.log('B737'[0]);
+console.log(airline.length);
+console.log('B737'.length);
+
+///string methods
+///indexOf(): the position in which appears the first occurrence of that value
+console.log(airline.indexOf('r'));
+console.log(airline.indexOf('Argentina')); ///position in which the word begins
+console.log(airline.indexOf('argentina')); ///-1: not found because JavaScript is case sensitive
+
+///lastIndexOf(): the last position in which a certain value appears
+console.log(airline.lastIndexOf('r'));
+
+///slice(): extract part of a string. This method does not change the underlying string because it's actually impossible to mutate strings
+console.log(airline.slice(4)); ///output-->Air Argentina
+///we can also specified an end parameter. The length will be the last parameter minus first parameter 7-4= 3
+console.log(airline.slice(4, 7)); ///output--> Air
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+///begin to extract from the end of the string
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
