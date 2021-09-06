@@ -780,18 +780,29 @@ const arrEvents = [...setEvents];
 console.log(arrEvents);
 
 ///TEACHER'S SOLUTION
+///const events = [...new Set(gameEvents.values())]
+///console.log(events);
 
 ///2
 gameEvents.delete(64);
 console.log(gameEvents);
 
 ///3
+const time = [...gameEvents.keys()].pop();
+///console.log(time);
+console.log(`An event happened, on
+average, every ${time / gameEvents.size} minutes`);
 
 ///4
-let str = '';
+
 for (const [key, value] of gameEvents) {
   key < 45
-    ? (str += `[FIRST HALF] ${key}: ${value} - `)
-    : (str += `[SECOND HALF] ${key}: ${value} -  `);
+    ? console.log(`[FIRST HALF] ${key}: ${value}`)
+    : console.log(`[SECOND HALF] ${key}: ${value}`);
 }
-console.log(str);
+
+///TEACHER'S SOLUTION
+///const hlaf = min <= 45 ? 'FIRST' : 'SECOND';
+///    for(const [key, value] of gameEvents){
+///      console.log(`[${half} HALF] ${min}: ${event}`)
+///   }
