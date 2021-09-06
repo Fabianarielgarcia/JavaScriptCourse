@@ -857,6 +857,7 @@ checkMiddleSeat('3E');
 
 ///Whenever we call a method on a string, JavaScript, behinde the scenes, will convert that string primitive to a String object with the same content. Then is on that object where the method is called. This process is called boxing. Then, when the operation is done, the object is converted back to a regular string primitive.
 */
+/*
 ////WORKING WITH STRINGS - PART 2
 
 ///changing the case of a string
@@ -930,3 +931,60 @@ const checkBagage = function (items) {
 checkBagage('I have a laptop, some Food and a pocket Knife');
 checkBagage('Socks and camera');
 checkBagage('Got some snacks and a gun for protection');
+*/
+
+///WORKING WITH STRINGS - PART 3
+///split(): allows us to split a string into multiple parts based on a divider string
+
+console.log('a+very+nice+string'.split('+'));
+console.log('Fabian Garcia'.split(' '));
+
+const [firstName, lastName] = 'Fabian Garcia'.split(' ');
+console.log(firstName, lastName);
+
+///join(): the opposite of split()
+const newName = ['Mr', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    ///namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' '));
+};
+capitalizeName('jessica and smith davis');
+capitalizeName('fabian garcia');
+
+///padding a string: add a number of characters to the string until the string has a certain desired length.
+
+const message = 'Go to gate 23';
+console.log(message.padStart(25, '+').padEnd(30, '-')); ///padding(length, value to add to the string)
+
+console.log('Jonas'.padStart(25, '+').padEnd(30, '-'));
+
+///real example of padding
+const maskCreditCard = function (number) {
+  const str = number + '';
+
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCreditCard('000254152510106'));
+console.log(maskCreditCard('000253254853196'));
+
+///repeat(): repeats a certain string multiple times
+const message1 = 'Bad weather...All departures delayed...';
+console.log(message1.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'✈'.repeat(n)}`);
+};
+
+planesInLine(5);
+planesInLine(6);
+planesInLine(15);
