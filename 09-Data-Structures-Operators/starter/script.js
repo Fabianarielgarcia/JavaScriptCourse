@@ -808,10 +808,11 @@ for (const [key, value] of gameEvents) {
 ///      console.log(`[${half} HALF] ${min}: ${event}`)
 ///   }
 */
-////WORKING WITH STRINGS
+
+////WORKING WITH STRINGS - PART 1
 const airline = 'TAP Air Argentina';
 const plane = 'A320';
-
+/*
 ///get the character of a string at a certain position
 console.log(plane[0]);
 console.log('B737'[0]);
@@ -838,3 +839,94 @@ console.log(airline.slice(airline.lastIndexOf(' ') + 1));
 ///begin to extract from the end of the string
 console.log(airline.slice(-2));
 console.log(airline.slice(1, -1));
+
+///write a function that recieves an airplane seat and logs to the console whether it is a middle seat or not
+
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') console.log('You got the middle seat');
+  else {
+    console.log('You got lucky');
+  }
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+///Whenever we call a method on a string, JavaScript, behinde the scenes, will convert that string primitive to a String object with the same content. Then is on that object where the method is called. This process is called boxing. Then, when the operation is done, the object is converted back to a regular string primitive.
+*/
+////WORKING WITH STRINGS - PART 2
+
+///changing the case of a string
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+///EXAMPLE: fix the capitalization on a passenger name
+function passengerCorrectName(passengerName) {
+  const passengerLower = passengerName.toLowerCase();
+  const passengerCorrect =
+    passengerLower[0].toUpperCase() + passengerLower.slice(1);
+  console.log(passengerCorrect);
+}
+
+const passenger = 'fAbI'; ///Fabi
+
+passengerCorrectName(passenger);
+
+///EXAMPLE: comparing a user input email
+const email = 'hello@fabi.io';
+const loginEmail = '  Hello@Fabi.IO \n';
+
+//const lowerEmail = loginEmail.toLowerCase();
+//console.log(lowerEmail);
+
+//const trimmedEmail = lowerEmail.trim();
+//console.log(trimmedEmail);
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+
+console.log(email === normalizedEmail);
+
+///replace parts of a string. The replace method is case sensitive
+const priceLondon = '288,97£';
+const priceUS = priceLondon.replace('£', '$').replace(',', '.');
+console.log(priceUS);
+
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23';
+console.log(announcement.replace('door', 'gate')); ///this only replace the first occurrence of the search string
+console.log(announcement.replaceAll('door', 'gate'));
+console.log(announcement.replace(/door/g, 'gate')); ///regular expression....g goes for global
+
+///methods that return booleans
+///includes()
+const plane1 = 'Airbus A320neo';
+console.log(plane1.includes('A320'));
+console.log(plane1.includes('Boing'));
+
+///startsWith()
+console.log(plane1.startsWith('Boing'));
+console.log(plane1.startsWith('Air'));
+
+///check if the current plane is part of the new Airbus family
+if (plane1.startsWith('Airbus') && plane1.endsWith('neo')) {
+  console.log('Part of the NEW Airbus family');
+}
+
+///Practice exercise: check if the baggage of a passenger is allow to be checked in
+
+const checkBagage = function (items) {
+  const baggage = items.toLowerCase(); ///to compare it with one standard
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are NOT allowed on board.');
+  } else {
+    console.log('Welcome aboard!');
+  }
+};
+
+checkBagage('I have a laptop, some Food and a pocket Knife');
+checkBagage('Socks and camera');
+checkBagage('Got some snacks and a gun for protection');
