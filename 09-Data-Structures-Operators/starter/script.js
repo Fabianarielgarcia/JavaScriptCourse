@@ -1016,21 +1016,47 @@ name conversion working 😉
 you're stuck. Then pause and continue!
 Afterwards, test with your own test data!
 GOOD LUCK 😀
-*/
+
 document.body.append(document.createElement('textarea'));
 document.body.append(document.createElement('button'));
 
 document.querySelector('button').addEventListener('click', function () {
   const text = document.querySelector('textarea').value;
-
+  //console.log(text);
   const rows = text.split('\n');
-
+  //console.log(rows);
+  //console.log(typeof rows);
   for (const [i, n] of rows.entries()) {
-    const [first, second] = n.toLocaleLowerCase().trim().split('_');
+    const [first, second] = n.toLowerCase().trim().split('_'); //split the two words
+    ///console.log(first, second);
     const output = `${first}${second.replace(
       second[0],
-      second[0].toUpperCase()
+      second[0].toUpperCase() ///apllying camelCase
     )}`;
     console.log(`${output.padEnd(20, ' ')}${'✅'.repeat(i + 1)}`);
   }
 });
+*/
+
+////STRING METHODS PRACTICE
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+//console.log(flights.split('+'));
+
+for (const flight of flights.split('+')) {
+  //console.log(flight.split(';'));
+  const [arrival, from, to, time] = flight.split(';');
+  //console.log(arrival, from, to, time);
+  const state = arrival.replaceAll('_', ' ');
+  const firstAirport = from.slice(0, 3);
+  const secondAirport = to.slice(0, 3);
+  const message =
+    `${state} from ${firstAirport.toUpperCase()} to ${secondAirport.toUpperCase()} (${time.replace(
+      ':',
+      'h'
+    )})`.padStart(36, ' ');
+  state.includes('Delayed')
+    ? console.log(`🔴 ${message}`)
+    : console.log(message);
+}
