@@ -52,3 +52,26 @@ console.log(fabian); ///output--->Mr Fabian
 ///FIRST-CLASS AND HIGHER-ORDER FUNCTIONS
 ///JavaScript is a language that has first class functions which in technical terms means that functions are so-called first citizens. In practice, that means that functions are simply treated as values. Since functions are values, there is a bunch of interesting things that we can do with them, like storing them in variables or objects properties, passing functions as arguments in other functions or return a function from another function. As functions are objects, there are also methods that we can call on functions.
 ///A higher order function is either a function that receives another function as an argument (callback function), or a function that returns a new function.
+
+///FUNCTIONS ACCEPTING CALLBACK FUNCTIONS
+///Creating a function that accepts aother functions as an input
+
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
+
+///higher-order function
+const transformer = function (str, fn) {
+  console.log(`Originak string: ${str}`);
+  console.log(`Transform string: ${fn(str)} `);
+
+  console.log(`Transformed by: ${fn.name}`); ///fn.name-->the name of the function
+};
+
+transformer('JavaScript is the best', upperFirstWord);
+transformer('JavaScript is the best', oneWord);
