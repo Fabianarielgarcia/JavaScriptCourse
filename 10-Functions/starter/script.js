@@ -54,6 +54,7 @@ console.log(fabian); ///output--->Mr Fabian
 ///A higher order function is either a function that receives another function as an argument (callback function), or a function that returns a new function.
 
 ///FUNCTIONS ACCEPTING CALLBACK FUNCTIONS
+/*
 ///Creating a function that accepts aother functions as an input
 
 const oneWord = function (str) {
@@ -75,3 +76,23 @@ const transformer = function (str, fn) {
 
 transformer('JavaScript is the best', upperFirstWord);
 transformer('JavaScript is the best', oneWord);
+*/
+
+///FUNCTIONS RETURNING FUNCTIONS
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greeterHey = greet('Hey');
+greeterHey('Jonas');
+greeterHey('Erik');
+
+///We can call the function at once
+greet('Hello')('Fabian');
+
+///Challenge
+const greetArr = greeting => name => console.log(`${greeting} ${name}`);
+
+greetArr('Hi')('Fede');
