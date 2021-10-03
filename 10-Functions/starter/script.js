@@ -78,6 +78,7 @@ transformer('JavaScript is the best', upperFirstWord);
 transformer('JavaScript is the best', oneWord);
 */
 
+/*
 ///FUNCTIONS RETURNING FUNCTIONS
 const greet = function (greeting) {
   return function (name) {
@@ -96,3 +97,51 @@ greet('Hello')('Fabian');
 const greetArr = greeting => name => console.log(`${greeting} ${name}`);
 
 greetArr('Hi')('Fede');
+*/
+
+///THE CALL AND APLLY METHODS
+
+const aerolineas = {
+  airline: 'Aerolineas Argentinas',
+  iataCode: 'AA',
+  booking: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.booking.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+const book = aerolineas.book;
+
+aerolineas.book(239, 'Fabian Garcia');
+aerolineas.book(634, 'Erik Dell');
+//console.log(aerolineas);
+
+const lapa = {
+  name: 'Lapa',
+  iataCode: 'LP',
+  booking: [],
+};
+
+///book(23, 'Federico Guevara '); ///This method will result in a typeError because book() is now just a regular function, and the this keyword in regular functions point to undefined. The this key word depends on how the function is actually called
+
+///how do we tell javaScript explicitly or manually what the this keyword should look like?. There are 3 function methods to do that: call, apply and bind
+
+///CALL METHOD
+book.call(lapa, 23, 'Federico Guevara'); ///first argument: where the this keyword should point, then the rest of the arguments
+console.log(lapa);
+
+///let's recap what happened here
+///we do not call the book function ourselves. Instead, we called the call method and it's then this call method, which will call the book function with the this keyword set to Lapa. So whatever we pass has the first argument of the call method. This allows us to manually and explicitly set the this keyword of any function that we want to call. Then all the arguments after the firstone are simply the arguments of the original function.
+
+book.call(aerolineas, 555, 'Brenda Barrios');
+console.log(aerolineas);
+
+///APLLY METHOD
+const flightData = [583, 'Fabian Garcia'];
+book.apply(lapa, flightData); ///it is not used in modern javascript, usually replace by ---> book.call(lapa, ...flightData)
+console.log(lapa);
+book.call(lapa, ...flightData);
+console.log(lapa);
