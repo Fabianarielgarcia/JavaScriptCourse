@@ -120,7 +120,7 @@ aerolineas.book(634, 'Erik Dell');
 //console.log(aerolineas);
 
 const lapa = {
-  name: 'Lapa',
+  airline: 'Lapa',
   iataCode: 'LP',
   booking: [],
 };
@@ -145,3 +145,65 @@ book.apply(lapa, flightData); ///it is not used in modern javascript, usually re
 console.log(lapa);
 book.call(lapa, ...flightData);
 console.log(lapa);
+
+///THE BIND METHOD
+///The bind method does not immediately call the function. Instead it returns a new function where the this keyword is bound. So it's set to whatever value we pass into bind.
+///Let's suppose that we need to use the book function for Lapa all the time
+
+///book.call(lapa, 23, 'Federico Guevara');
+const bookAA = book.bind(aerolineas);
+const bookLa = book.bind(lapa); ///this will not call the book function.Instead it will return a new function where the this keyword will always be set to Lapa
+bookLa(23, 'Silvia Daroch');
+
+const bookLa23 = book.bind(lapa, 23); ///bookLa23 only needs the name because the flight number was set to 23
+bookLa23('Walter Dell');
+bookLa23('Viviana Pasos');
+
+///We can use the bind method when we use objects together with event listeners
+aerolineas.planes = 300;
+aerolineas.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+
+///document.querySelector('.buy').addEventListener('click', aerolineas.buyPlane);output--> NaN because in an event handler function, the this keyword always points to the element on which that handler is attached to (aerolineas.buyPlane is attached to document.querySelector(".buy")). We need to manually define the this keyword
+document
+  .querySelector('.buy')
+  .addEventListener('click', aerolineas.buyPlane.bind(aerolineas));
+
+///Partial application for the bind method
+///general function for adding tax
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+///now let's say that there is one tax that we use all the time
+
+const addVAT = addTax.bind(null, 0.23);
+///addVAT = value => value + value * 0.23
+///the first parameter is where the this keyword points. In this case, it does not matter where the this keyword points because it is not even in the function addTax(), so it's kind of standard to just use null
+
+console.log(addVAT(100));
+console.log(addVAT(23));
+
+///CREATE A FUNCTION THAT RETURND A FUNCTION WHICH SHOULD DO WHAT addVAT does.
+///FUNCTIONS RETURNING FUNCTIONS
+
+const otherTax = function (value) {
+  return function (rate) {
+    console.log(value + value * rate);
+  };
+};
+
+const val = otherTax(200);
+val(0.23);
+
+///TEACHER'S SOLUTION
+const addTaxRate = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const addVAT2 = addTaxRate(0.23);
+console.log(addVAT2(200));
