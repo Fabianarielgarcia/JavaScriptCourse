@@ -356,7 +356,7 @@ runOnce(); ///However this function can be executed naytimelater because there i
 ///The same will also work for arrow functions
 (() => console.log('This will ALSO never run again'))();
 */
-
+/*
 ///CLOSURES
 /// A clousere is not a feature that we explicity use, so we do not create closures manually, it happens automatically in certain situations, we just need to recognize those situations
 
@@ -379,3 +379,62 @@ booker();
 console.dir(booker);
 ///closure has priority over global scope
 console.log(`Global passengerCount = ${passengerCount}`);
+*/
+
+///EXAMPLES OF CLOSURE WHERE WE DO NOT NEED TO RETURN A FUNCTION IN ORTHER TO CREATE A CLOSURE
+
+///EXAMPLE 1
+/*
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+g();
+f(); ///this f() function really does closure over any variables of the execution context in which it was defined. That is true when the variable itself (f) was technically not even defined inside of the g() variable environment. f() has access to the "a" variable even after the g() function (line 396) has of course finished its execution. The "a" variable is inside the backpack of the f() function.
+*/
+
+///let's see what happens wen we assign the fa value a second function.
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+console.dir(f);
+///re-assigning f function
+h();
+f(); ///let's keep in mind that this f() is a different function from the previous one because it was reassigned by h().output--->1554 = 777*2. This proves that the f() function that it was reassigned also closed over the variable environment of h(). That is why it also has access to de "b" variable which has set to 777
+console.dir(f);
+
+///EXAMPLE 2
+///timer is a great example where we do not need to return a function in order to see closure in action
+
+const boardPassengers = function (n, wait) {
+  //const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000); ///first parameter a function which will be executed, second argument = miliseconds. After 1000 miliseconds (second), the function was executed.
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+const perGroup = 1000; ///if we take out the perGroup variable inside the boardPassengers () function, this perGroup variable will be used.
+boardPassengers(180, 3); ///So immediatelly perGroup variable is created, the set timeout is run and the console,log is run, and then, after 3 seconds, the setTimeout function will be executed. Lets see what happens to the n and the perGroup variables that are in the boardPassengers() function. Take into account that the callback function (setTimeout) was executed completely independently from the board passenger function. still, the callback function was able to use all the variables that were in the variable environment in which was created ("n" and "perGroup")
