@@ -71,10 +71,10 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
-
+/*
 ///ARRAY METHODS
 let arr = ['a', 'b', 'c', 'd', 'e'];
 
@@ -115,4 +115,52 @@ console.log([...ar, ...arr2]); ///USING THE SPREAD OPERATOR TO CONCATENATE TWO A
 ///JOIN METHOD: it joins all the elements passing a separator as parameter
 console.log(letters.join(' - ')); ///the result is a string with the separator that we specified
 
-///WE HAVE ALREADY SEEN METHODS: PUSH(), SHIFT(), UNSHIFT(), POP(), INDEXOF(), INCLUDES()
+///WE HAVE ALREADY SEEN METHODS: PUSH(), SHIFT(), UNSHIFT(), POP(), INDEXOF(), INCLUDES().
+*/
+
+///LOOPING ARRAYS: FOREACH
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+///LET'S LOOP OVER THIS ARRAY IN ORDER TO PRINT SOMETHING FOE EACH MOVEMENT IN THIS BANK ACCOUNT
+
+///Example using the for of loop
+for (const movement of movements) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`); ///math.abs shows the absolute value by removing the sign (-)
+  }
+}
+
+///EXAMPLE USING THE FOREACH LOOP. The foreach function requires a callback function. foreach() is a higer order function which requires a callback function in order to tell it what to do. Te forEach method will loop over the array and in ech iteration it will call the callback function. In each iteration, the forEach method will pass the current element of the array as an argument
+console.log('----FOREACH-----');
+movements.forEach(function (movement) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`);
+  }
+});
+
+///WHAT IF WE NEED ACCES TO A COUNTER VARIABLE HERE
+console.log('---FOR OF LOOP WITH ENTRIES()----');
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+console.log('----FOREACH WITH INDEX-----');
+///FOREACH METHOD PASSES THE CURRENT ELEMENT OF THE ARRAY, THE INDEX AND THE ENTIRE ARRAY WE ARE LOOPING. THEREFOR WE CAN SPECIFY THEM IN THE PARAMETERS LIST
+///first parameter: current elelement, second parameter: the current index, third parameter: the entire array. This is the order in which the current parameters are passed in the callback function
+movements.forEach(function (movement, i, arr) {
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+});
+
+///DIFFERENCE BETWEEN FOREACH LOOP AND FOR OF LOOP: WE CANNOT BREAK UP A FOREACH LOOP, SO THE CONTINUE AND BREAK STATEMENTS DOES NOT WORK ON A FOREACH LOOP AT ALL. iF WE NEED TO BREAK UP A LOOP, WE HAVE TO CONTINUE USING THE FOR OF LOOP
