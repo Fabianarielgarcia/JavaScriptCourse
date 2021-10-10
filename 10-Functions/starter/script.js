@@ -277,8 +277,12 @@ const poll = {
       this.displayResults();
     }
   },
-  displayResults: function (type) {
-    console.log(poll.answers);
+  displayResults: (type = 'array') {
+    if(type === 'array){
+      console.log(this.answers);
+    }else if(type === 'string){
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+    }
   },
 };
 //console.log(poll);
@@ -288,8 +292,10 @@ document
   .querySelector('.poll')
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
+  poll.displayResults.call({answers: [5, 2, 3]});
+  poll.displayResults.call({answers: [5, 2, 3]}, 'string');
 */
-
+/*
 ///TEACHER'S RESOLUTION
 
 const poll = {
@@ -309,7 +315,7 @@ const poll = {
     typeof answer === 'number' &&
       answer < this.answers.length &&
       this.answers[answer]++;
-
+    ///short circuiting: if answer is a number, it moves on. If answer < anser.length, it moves on and the final part is excecuted
     this.displayResult();
     this.displayResult('string');
   },
@@ -330,5 +336,23 @@ document
 //Test data for bonus:
 //§ Data 1: [5, 2, 3]
 //§ Data 2: [1, 5, 3, 9, 6, 1]
-
+///We create a new answers object with the new array so that the this keyword points to the new object
 poll.displayResult.call({ answers: [5, 2, 3] }, 'string');
+*/
+/*
+///IMMEDIATELY INVOKED FUNCTION EXPRESSIONS (IIFE)
+///Sometimes we need a function that is only executed once and then never again. So basically a function yhat disappears right after it's called once
+const runOnce = function () {
+  console.log('This will never run again');
+};
+
+runOnce(); ///However this function can be executed naytimelater because there is nothing that stop us from doing it. We want to actually execute a function immediately and not even having to save it somewhere. We do this like this:
+
+(function () {
+  ///this will log an error for now. We can trick javascript into thinkibg that this is just a function expression by wrapping everything into parentheses()
+  console.log('This will never run again');
+})();
+
+///The same will also work for arrow functions
+(() => console.log('This will ALSO never run again'))();
+*/
