@@ -74,3 +74,45 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+///ARRAY METHODS
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+////SLICE METHOD: we can extract part of any array without changing the original array
+
+console.log(arr.slice(2)); ///index at which we will start extracting (from 'c', to the end). This slice method will return a new array. This does not mutate the original arr array, it returns a new array
+///we can also define the end parameter
+console.log(arr.slice(2, 4)); //['c', 'd']. Just like in strings, the end parameter is not included in the output. The length of the new array will be the end parameter(4) minus the initial parameter(2) 4-2 = 2.
+
+///like in strings, we can define a negative begin parameter, and then it will start to copy from the end of the array.
+console.log(arr.slice(-2)); ///['d', 'e']; ---> -1 is always the last element of the array
+console.log(arr.slice(1, -2)); ///['b', 'c']; it starts extracting at position 1 and extracts everything except the last two elements
+
+///we can use the slice method to create a shallow copy of the array. To do that, we simply call it without any parameter
+console.log(arr.slice());
+///we can doit with the spread operator
+console.log([...arr]);
+
+///SPLICE METHOD: it works in a similar way to the slice method, but it actually change (mutate) the original array. In general, we are not interesting in which elements retur the splice method, we just use it to delete elements. It is used generally to remove the last elelement of the array
+console.log(arr.splice(2)); ///['a', 'b', 'c'], but the arr array changed
+console.log(arr); //['a', 'b'] it changed
+console.log(arr.splice(-1)); //['b']
+///The splice method with 2 parameters means: the first parameters is not included and the second parameter are the elements that are going to be removed. Example, if we have the original arr array, and we do arr.splice(1, 2), means that we ar going to remove from index one the following two elements. So ['a', 'b', 'c', 'd', 'e'] will be transformed into ['a', 'd', 'e']
+
+///REVERSE METHOD
+let ar = ['a', 'b', 'c', 'd', 'e'];
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse()); ///the reverse method actually mutate the original array
+console.log(arr2);
+
+///CONCAT METHOD: is used to cancatenate two arrays. We have to specified the second array. THIS METHOD DOES NOT MUTATE THE ORIGINAL ARRAY
+const letters = ar.concat(arr2);
+console.log(letters); ///USING THE CONCAT METHOD
+
+///we also did it in a different way
+console.log([...ar, ...arr2]); ///USING THE SPREAD OPERATOR TO CONCATENATE TWO ARRAYS
+
+///JOIN METHOD: it joins all the elements passing a separator as parameter
+console.log(letters.join(' - ')); ///the result is a string with the separator that we specified
+
+///WE HAVE ALREADY SEEN METHODS: PUSH(), SHIFT(), UNSHIFT(), POP(), INDEXOF(), INCLUDES()
