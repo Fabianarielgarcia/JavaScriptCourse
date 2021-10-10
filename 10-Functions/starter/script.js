@@ -397,7 +397,7 @@ const g = function () {
 g();
 f(); ///this f() function really does closure over any variables of the execution context in which it was defined. That is true when the variable itself (f) was technically not even defined inside of the g() variable environment. f() has access to the "a" variable even after the g() function (line 396) has of course finished its execution. The "a" variable is inside the backpack of the f() function.
 */
-
+/*
 ///let's see what happens wen we assign the fa value a second function.
 let f;
 
@@ -437,4 +437,40 @@ const boardPassengers = function (n, wait) {
   console.log(`Will start boarding in ${wait} seconds`);
 };
 const perGroup = 1000; ///if we take out the perGroup variable inside the boardPassengers () function, this perGroup variable will be used.
-boardPassengers(180, 3); ///So immediatelly perGroup variable is created, the set timeout is run and the console,log is run, and then, after 3 seconds, the setTimeout function will be executed. Lets see what happens to the n and the perGroup variables that are in the boardPassengers() function. Take into account that the callback function (setTimeout) was executed completely independently from the board passenger function. still, the callback function was able to use all the variables that were in the variable environment in which was created ("n" and "perGroup")
+boardPassengers(180, 3); ///So immediatelly perGroup variable is created, the set timeout is run and the console,log is run, and then, after 3 seconds, the setTimeout function will be executed. Lets see what happens to the n and the perGroup variables that are in the boardPassengers() function. Take into account that the callback function (setTimeout) was executed completely independently from the board passenger function. still, the callback function was able to use all the variables that were in the variable environment in which was created ("n" and "perGroup").
+*/
+/*
+Coding Challenge #2
+This is more of a thinking challenge than a coding challenge 🤓
+Your tasks:
+1. Take the IIFE below and at the end of the function, attach an event listener that
+changes the color of the selected h1 element ('header') to blue, each time
+the body element is clicked. Do not select the h1 element again!
+2. And now explain to yourself (or someone around you) why this worked! Take all
+the time you need. Think about when exactly the callback function is executed,
+and what that means for the variables involved in this example.
+
+GOOD LUCK 😀
+*/
+/*
+///My resolution
+let f;
+(function () {
+  const header = document.querySelector('h1');
+  f = header;
+  header.style.color = 'red';
+  document.querySelector('body').addEventListener('click', function () {
+    f.style.color = 'blue';
+  });
+})();
+
+///Teacher's resolution
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  document.querySelector('body').addEventListener('click', function () {
+    header.style.color = 'blue';
+  });
+})();
+*/
