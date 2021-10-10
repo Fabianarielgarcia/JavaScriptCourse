@@ -356,3 +356,26 @@ runOnce(); ///However this function can be executed naytimelater because there i
 ///The same will also work for arrow functions
 (() => console.log('This will ALSO never run again'))();
 */
+
+///CLOSURES
+/// A clousere is not a feature that we explicity use, so we do not create closures manually, it happens automatically in certain situations, we just need to recognize those situations
+
+let passengerCount = 0;
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking(); ///this booker function is just a function that exists out here in the global enviroment or in the global scope. And the enviroment in which the function was created (secureBooking function) is no longer active. It is in fact gone. But still the booker function somehow continues to have access to the variables that were present at the time that the function was created, in particular, the passengerCount variable. So that is exactly what closure does. A closure makes a function remember all the varianles that existed at the function's birthplae essentially (the function that is returned at the secureBooking function remembers everything at its birthplace, by the time it was created). The secret of closure is this: ANY FUNCTION ALWAYS HAS ACCESS TO THE VARIABLE ENVIROMENT OF THE EXECUTION CONTEXT IN WHICH THE FUNCTION WAS CREATED. In the case of booker, this function was created, it was born in the execution context of secureBooking(), which was popped off the stack previously. So, therefor the booker function will get access to this variable environment which contains the passengerCount variable, and this is how the function will be able to read and manioulate the passengerCount variable. So it's this conection that we call closure. The closure is then basically this variable (passengerCount) environment attached to the function, exactly as it was at the time and place that the function was created.
+///The closure basically has priority over the scope chain, because if we do have another variable also called passengerCount in the global scope, JavaScript will look first at the variable in the closure for over the one in the global scope
+
+booker();
+booker();
+booker();
+console.dir(booker);
+///closure has priority over global scope
+console.log(`Global passengerCount = ${passengerCount}`);
