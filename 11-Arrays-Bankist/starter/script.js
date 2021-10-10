@@ -65,12 +65,6 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
-
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
@@ -118,6 +112,7 @@ console.log(letters.join(' - ')); ///the result is a string with the separator t
 ///WE HAVE ALREADY SEEN METHODS: PUSH(), SHIFT(), UNSHIFT(), POP(), INDEXOF(), INCLUDES().
 */
 
+/*
 ///LOOPING ARRAYS: FOREACH
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -163,4 +158,28 @@ movements.forEach(function (movement, i, arr) {
   }
 });
 
-///DIFFERENCE BETWEEN FOREACH LOOP AND FOR OF LOOP: WE CANNOT BREAK UP A FOREACH LOOP, SO THE CONTINUE AND BREAK STATEMENTS DOES NOT WORK ON A FOREACH LOOP AT ALL. iF WE NEED TO BREAK UP A LOOP, WE HAVE TO CONTINUE USING THE FOR OF LOOP
+///DIFFERENCE BETWEEN FOREACH LOOP AND FOR OF LOOP: WE CANNOT BREAK UP A FOREACH LOOP, SO THE CONTINUE AND BREAK STATEMENTS DOES NOT WORK ON A FOREACH LOOP AT ALL. iF WE NEED TO BREAK UP A LOOP, WE HAVE TO CONTINUE USING THE FOR OF LOOP.
+*/
+
+/*
+///FOREACH WITH MAPS AND SETS
+
+///Map
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+///Set
+///THE KEY IS EXACTLY THE SAME AS THE VALUE
+const currenciesUnique = new Set(['USD', 'GBP', 'EUR', 'EUR']);
+console.log(currenciesUnique);
+currenciesUnique.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+*/
