@@ -228,7 +228,7 @@ Test data:
 § Data 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 Hints: Use tools from all lectures in this section so far 😉
 GOOD LUCK 😀
-*/
+
 
 const julias1 = [3, 5, 2, 12, 7];
 const kates1 = [4, 1, 15, 8, 3];
@@ -258,3 +258,13 @@ const checkDogs = function (arr1, arr2) {
 checkDogs(julias1, kates1);
 console.log('-----data 2------');
 checkDogs(julias2, kates2);
+*/
+
+///DATA TRANSFORMATION:MAP, FILTER,REDUCE
+///basically we use these methods to create new arrays based on transforming data from other arrays
+
+///MAP: we can loop over the arrays. Is similar to the foreach method with the defference that map creates a brand new array based on the original array. Map builds us a brand new array containing the results of applying an operation to the original array. Example, [3, 1, 4] MAP current * 2 ---> [6, 2, 8]
+
+/// FILTER: is used to filter for elements in the original array which satisfy a certain condition. In oder words, elements for which the condition is true, will be included in a new array that the filter method returns. All other elements will get filtered out, so they will not be included in the new array. Example, [3, 1, 4] FILTER current < 2 --->[1]
+
+///REDUCE: used to boil down all the elements of the original array into one single value. An example of this,  can be to add all the elements of an array together. Is the single value the one that is return from the reduce method in the end, so there is no new array in this case, but only the reduce value.
