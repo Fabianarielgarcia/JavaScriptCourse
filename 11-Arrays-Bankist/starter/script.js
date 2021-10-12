@@ -81,8 +81,15 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
-///Computing user's name
+///Calculating and Display Balance
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
 
+calcDisplayBalance(account1.movements);
+
+///Computing user's name
 const createUserNames = function (accs) {
   ///array with all the accounts
   accs.forEach(function (acc) {
@@ -97,6 +104,11 @@ const createUserNames = function (accs) {
 };
 
 createUserNames(accounts);
+
+const calcPrintBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
 ///let's loop over the array, take the first letter of each element and then put them together into a new array
 
 /////////////////////////////////////////////////
@@ -315,6 +327,7 @@ const movementsDescriptions = movements.map(
 console.log(movementsDescriptions);
 */
 
+/*
 ///THE FILTER METHOD
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -323,3 +336,35 @@ console.log(deposits);
 
 const withdrawals = movements.filter(mov => mov < 0);
 console.log(withdrawals);
+*/
+
+///THE REDUCE METHOD
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+///movements.reduce() takes two parameters. First, the callback function, second the accumulator used in the callback function (the firdt element "acc")
+
+const balance = movements.reduce(function (acc, mov, i, arr) {
+  ///first element: accumulator
+  ///second element: current element of the array
+  ///third element: index
+  ///forth element: array
+  return acc + mov;
+}, 0);
+console.log(balance);
+
+// now with an arrow function
+// const balance = movements.reduce((acc, mov) => acc + mov, 0);
+// console.log(balance);
+
+///We can also do other stuff than add some values when using the reduce() method
+
+///Let's get the maximum value of the movements array
+const maximum = movements.reduce((acc, mov) => {
+  if (acc > mov) {
+    return acc;
+  } else {
+    return mov;
+  }
+}, movements[0]);
+
+console.log(maximum);
