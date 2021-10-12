@@ -476,3 +476,16 @@ const calcAverageHumanAge = ages =>
 console.log(calcAverageHumanAge(data1));
 console.log(calcAverageHumanAge(data2));
 */
+
+///THE FIND METHOD
+///WE CAN USE THE FIND METHOD TO RETRIEVE ONE ELEMENT OF AN ARRAY BASED ON A CONDITION. THE FIND METHOD ALSO NEEDS A CALLBACK FUNCTION THAT RETURNS A BOOLEAN. UNLIKE THE FILTER METHOD, THE FIND METHOD WILL ACTUALLY NOT RETURN A NEW ARRAY BUT IT WILL ONLY RETURN THE FIRST ELEMENT IN THE ARRAY THAT SATISFIES THIS CONDITION
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(firstWithdrawal);
+
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
