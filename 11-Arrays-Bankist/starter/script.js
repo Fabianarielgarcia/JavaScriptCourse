@@ -107,7 +107,7 @@ const calcDisplaySummary = function (movements) {
     .map(deposit => (deposit * 1.2) / 100)
     .filter((interest, i, arr) => {
       ///only calculate the interest when there are at least 1 euro
-      console.log(arr);
+      //console.log(arr);
       return interest >= 1;
     })
     .reduce((acc, interest) => acc + interest, 0);
@@ -440,6 +440,7 @@ console.log(calcAverageHumanAge(data1));
 console.log(calcAverageHumanAge(data2));
 */
 
+/*
 ///THE MAGIC OF CHAINING METHODS
 ///lET'S SAY THAT WE WANTED TO TAKE ALL THE MOVEMENTS DEPOSITS THEN CONVERT THEM FROM EUROS TO DOLLARS AND FINALLY ADD THEM ALL UP RO KNOW HOW MUCH WE DEPOSITED IN THE ACCOUNT IN US DOLLARS. WE CAN CHAIN A METHOD AFTER ANOTHER ONE IF THE RETURNING METHOD RETURNS AN ARRAY
 
@@ -453,3 +454,25 @@ const totalDepositsUSD = movements
   .reduce((acc, mov) => acc + mov, 0);
 
 console.log(totalDepositsUSD);
+*/
+
+/*Coding Challenge #3
+Rewrite the 'calcAverageHumanAge' function from Challenge #2, but this time
+as an arrow function, and using chaining!
+Test data:
+§ Data 1: [5, 2, 4, 1, 15, 8, 3]
+§ Data 2: [16, 6, 10, 5, 6, 1, 4]
+GOOD LUCK 😀
+
+const data1 = [5, 2, 4, 1, 15, 8, 3];
+const data2 = [16, 6, 10, 5, 6, 1, 4];
+
+const calcAverageHumanAge = ages =>
+  ages
+    .map(age => (age <= 2 ? age * 2 : age * 4 + 16))
+    .filter(age => age >= 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+
+console.log(calcAverageHumanAge(data1));
+console.log(calcAverageHumanAge(data2));
+*/
