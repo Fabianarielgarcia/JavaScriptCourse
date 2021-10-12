@@ -268,3 +268,29 @@ checkDogs(julias2, kates2);
 /// FILTER: is used to filter for elements in the original array which satisfy a certain condition. In oder words, elements for which the condition is true, will be included in a new array that the filter method returns. All other elements will get filtered out, so they will not be included in the new array. Example, [3, 1, 4] FILTER current < 2 --->[1]
 
 ///REDUCE: used to boil down all the elements of the original array into one single value. An example of this,  can be to add all the elements of an array together. Is the single value the one that is return from the reduce method in the end, so there is no new array in this case, but only the reduce value.
+
+///THE MAP METHOD
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+///Let's suppose that this movements are in Euros and we want to convert them to US dollars. 1 Euro = 1.1 US dollar
+const eurToUsd = 1.1;
+
+const movementsUsd = movements.map(function (mov) {
+  return mov * eurToUsd;
+});
+
+///we are going to do the same but with an arrow function
+const movToUsd = movements.map(mov => mov * eurToUsd);
+console.log(movements);
+console.log(movementsUsd);
+console.log(movToUsd);
+
+///Just as the forEach() loop. the map method has access to same three parameters (value, index, array)
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+
+console.log(movementsDescriptions);
