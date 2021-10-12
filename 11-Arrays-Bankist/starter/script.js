@@ -81,6 +81,24 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+///Computing user's name
+
+const createUserNames = function (accs) {
+  ///array with all the accounts
+  accs.forEach(function (acc) {
+    //acc each account
+    ///create a new property call username
+    acc.username = acc.owner
+      .toLocaleLowerCase()
+      .split(' ')
+      .map(name => name[0]) //output ---> ['s', 't', 'w']
+      .join(''); ///output--->stw
+  });
+};
+
+createUserNames(accounts);
+///let's loop over the array, take the first letter of each element and then put them together into a new array
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -269,6 +287,7 @@ checkDogs(julias2, kates2);
 
 ///REDUCE: used to boil down all the elements of the original array into one single value. An example of this,  can be to add all the elements of an array together. Is the single value the one that is return from the reduce method in the end, so there is no new array in this case, but only the reduce value.
 
+/*
 ///THE MAP METHOD
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -294,3 +313,4 @@ const movementsDescriptions = movements.map(
 );
 
 console.log(movementsDescriptions);
+*/
