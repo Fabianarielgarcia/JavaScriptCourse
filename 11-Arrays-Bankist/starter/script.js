@@ -71,7 +71,7 @@ const displayMovements = function (movements) {
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-      <div class="movements__value">${mov}</div>
+      <div class="movements__value">${mov}€</div>
     </div>
     `;
     //this method accepts 2 strings: firt: the position in which we want to attach the html; second: the string containing de html that we want to insert
@@ -84,10 +84,38 @@ displayMovements(account1.movements);
 ///Calculating and Display Balance
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance}€`;
 };
 
 calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter((interest, i, arr) => {
+      ///only calculate the interest when there are at least 1 euro
+      console.log(arr);
+      return interest >= 1;
+    })
+    .reduce((acc, interest) => acc + interest, 0);
+
+  labelSumInterest.textContent = `${interest}€`;
+};
+
+calcDisplaySummary(account1.movements);
 
 ///Computing user's name
 const createUserNames = function (accs) {
@@ -388,7 +416,7 @@ Test data:
 § Data 1: [5, 2, 4, 1, 15, 8, 3]
 § Data 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
-*/
+
 
 const data1 = [5, 2, 4, 1, 15, 8, 3];
 const data2 = [16, 6, 10, 5, 6, 1, 4];
@@ -410,3 +438,18 @@ const calcAverageHumanAge = function (ages) {
 
 console.log(calcAverageHumanAge(data1));
 console.log(calcAverageHumanAge(data2));
+*/
+
+///THE MAGIC OF CHAINING METHODS
+///lET'S SAY THAT WE WANTED TO TAKE ALL THE MOVEMENTS DEPOSITS THEN CONVERT THEM FROM EUROS TO DOLLARS AND FINALLY ADD THEM ALL UP RO KNOW HOW MUCH WE DEPOSITED IN THE ACCOUNT IN US DOLLARS. WE CAN CHAIN A METHOD AFTER ANOTHER ONE IF THE RETURNING METHOD RETURNS AN ARRAY
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const eurToUsd = 1.1;
+///first we filter de deposits, then we transform the money to dollars and then we sum all the deposits
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalDepositsUSD);
