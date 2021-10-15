@@ -95,7 +95,7 @@ nav {
 
   /* NOTE This creates the fade in/out anumation */
   /*White background with opacity:0, we take it out and now we can see the page how it really is.*/
-  /* opacity: 0; */
+  opacity: 0;
   transition: all 1s;
 }
 
