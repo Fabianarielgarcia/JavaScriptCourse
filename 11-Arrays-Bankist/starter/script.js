@@ -197,6 +197,30 @@ btnTransfer.addEventListener('click', function (e) {
     updateUI(currentAccount);
   }
 });
+
+///THE FINDINDEX METHOD
+///THIS METHOD RETURNS THE INDEX OF THE FOUND ELEMENT AND NOT THE ELEMENT ITSELF
+///Let's implement the closing an account method of our application
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    currentAccount.username === inputCloseUsername.value &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    ///
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    //Delete account
+    accounts.splice(index, 1);
+    //hide UI
+    containerApp.style.opacity = 0;
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+
 ///let's loop over the array, take the first letter of each element and then put them together into a new array
 
 /////////////////////////////////////////////////
