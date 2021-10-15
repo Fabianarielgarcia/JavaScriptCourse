@@ -80,9 +80,9 @@ const displayMovements = function (movements) {
 };
 
 ///Calculating and Display Balance
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance}€`;
+const calcDisplayBalance = function (account) {
+  account.balance = account.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${account.balance}€`;
 };
 
 const calcDisplaySummary = function (account) {
@@ -127,6 +127,14 @@ const createUserNames = function (accs) {
 
 createUserNames(accounts);
 
+const updateUI = function (acc) {
+  displayMovements(acc.movements);
+  ///display balance
+  calcDisplayBalance(acc);
+  ///display summary
+  calcDisplaySummary(acc);
+};
+
 const calcPrintBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance} EUR`;
@@ -161,14 +169,34 @@ btnLogin.addEventListener('click', function (event) {
     ///taking the cursor out of the pin input
     inputLoginPin.blur();
     ///display movements
-    displayMovements(currentAccount.movements);
-    ///display balance
-    calcDisplayBalance(currentAccount.movements);
-    ///display summary
-    calcDisplaySummary(currentAccount);
+    updateUI(currentAccount);
   }
 });
 
+///TRANSFER MONEY
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault(); //because is a form
+
+  const amount = Number(inputTransferAmount.value);
+  const receiverAccount = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+
+  inputTransferAmount.value = inputTransferTo.value = '';
+  if (
+    amount > 0 &&
+    currentAccount.balance >= amount &&
+    receiverAccount &&
+    receiverAccount?.username !== currentAccount.username
+  ) {
+    ///doing the transfer
+    currentAccount.movements.push(-amount);
+    receiverAccount.movements.push(amount);
+
+    //update UI
+    updateUI(currentAccount);
+  }
+});
 ///let's loop over the array, take the first letter of each element and then put them together into a new array
 
 /////////////////////////////////////////////////
