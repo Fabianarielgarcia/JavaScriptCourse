@@ -79,32 +79,28 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-
 ///Calculating and Display Balance
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance}€`;
 };
 
-calcDisplayBalance(account1.movements);
-
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (account) {
+  const incomes = account.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
 
   labelSumIn.textContent = `${incomes}€`;
 
-  const out = movements
+  const out = account.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
 
   labelSumOut.textContent = `${Math.abs(out)}€`;
 
-  const interest = movements
+  const interest = account.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * account.interestRate) / 100)
     .filter((interest, i, arr) => {
       ///only calculate the interest when there are at least 1 euro
       //console.log(arr);
@@ -114,8 +110,6 @@ const calcDisplaySummary = function (movements) {
 
   labelSumInterest.textContent = `${interest}€`;
 };
-
-calcDisplaySummary(account1.movements);
 
 ///Computing user's name
 const createUserNames = function (accs) {
@@ -137,6 +131,44 @@ const calcPrintBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance} EUR`;
 };
+
+///IMPLEMENTING LOGIN
+///Event handler
+///when we attached an event listener to a button in a form element (in HTML, the default behavior when we click the submit button is for the page to reload) we need to stop the reloading of the page from happening. For that, we need to give the function the event parameter, and on that event we can call a method called preventDefault()
+
+let currentAccount;
+
+btnLogin.addEventListener('click', function (event) {
+  ///prevent form from submitting
+  event.preventDefault();
+
+  ///the find() method will return undefined if no element matches the condition
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+
+  ///optional chaining (?)first is checked if the current account exists, then if the cuurentAccount.pin is === to .....
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    ///display ui and message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    ///opacity 100 so the information of the page appears
+    containerApp.style.opacity = 100;
+
+    ///clear the input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    ///taking the cursor out of the pin input
+    inputLoginPin.blur();
+    ///display movements
+    displayMovements(currentAccount.movements);
+    ///display balance
+    calcDisplayBalance(currentAccount.movements);
+    ///display summary
+    calcDisplaySummary(currentAccount);
+  }
+});
+
 ///let's loop over the array, take the first letter of each element and then put them together into a new array
 
 /////////////////////////////////////////////////
@@ -476,7 +508,7 @@ const calcAverageHumanAge = ages =>
 console.log(calcAverageHumanAge(data1));
 console.log(calcAverageHumanAge(data2));
 */
-
+/*
 ///THE FIND METHOD
 ///WE CAN USE THE FIND METHOD TO RETRIEVE ONE ELEMENT OF AN ARRAY BASED ON A CONDITION. THE FIND METHOD ALSO NEEDS A CALLBACK FUNCTION THAT RETURNS A BOOLEAN. UNLIKE THE FILTER METHOD, THE FIND METHOD WILL ACTUALLY NOT RETURN A NEW ARRAY BUT IT WILL ONLY RETURN THE FIRST ELEMENT IN THE ARRAY THAT SATISFIES THIS CONDITION
 
@@ -489,3 +521,4 @@ console.log(accounts);
 
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account);
+*/
