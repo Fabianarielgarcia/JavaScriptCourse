@@ -592,8 +592,8 @@ const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account);
 */
 
+/*
 ///SOME AND EVERY
-
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 ///here the includes() method only checks for equality
@@ -612,3 +612,39 @@ console.log(movements.every(mov => mov > 0));
 
 const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
+*/
+
+///FLAT AND FLATMAP
+
+///What if we wanted to take all these elements in the separate and put all of these together in just one big array
+///The falt method removed the nested arrays and flattened the array
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [
+  [
+    [1, 2, 3],
+    [4, 5, 6],
+  ],
+  7,
+  8,
+];
+console.log(arrDeep.flat(2)); ///The argument inside the flat() method especifies the level of nested arrays we want to go in order to flat the array
+
+///Let's say that the bank wants to calculate the overall balance of all the movements of all the accounts
+
+const accountMovements = accounts.map(acc => acc.movements);
+console.log(accountMovements);
+
+const allMovements = accountMovements.flat();
+console.log(allMovements);
+
+const overalBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+
+///The flatMap() method essentially combines a map and a flat method into just one method which is better for performance
+
+const overalBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance2);
