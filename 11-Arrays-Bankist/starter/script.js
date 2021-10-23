@@ -198,6 +198,23 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+///GET A LOAN
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    ///add movement
+    currentAccount.movements.push(amount);
+
+    //update UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
 ///THE FINDINDEX METHOD
 ///THIS METHOD RETURNS THE INDEX OF THE FOUND ELEMENT AND NOT THE ELEMENT ITSELF
 ///Let's implement the closing an account method of our application
@@ -574,3 +591,24 @@ console.log(accounts);
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account);
 */
+
+///SOME AND EVERY
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+///here the includes() method only checks for equality
+console.log(movements);
+console.log(movements.includes(-130));
+
+///What if we want to test for a condition? Here the some method comes into play. Let's say that we want to know if there has been any deposit on this account
+
+const anyDeposits = movements.some(mov => mov > 0);
+console.log(anyDeposits); ///output--->true
+
+///EVERY
+console.log(movements.every(mov => mov > 0));
+
+///Separate callback
+
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
