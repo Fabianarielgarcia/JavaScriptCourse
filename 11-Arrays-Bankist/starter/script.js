@@ -61,9 +61,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = ''; ///this line of code takes out the two original elements before the foreach was executed. innerHTML is simmilar to text context. The difference is that text context simply returns the text itself, while HTML returns everithing, including the HTML
-  movements.forEach(function (mov, i) {
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -236,6 +239,15 @@ btnClose.addEventListener('click', function (e) {
     containerApp.style.opacity = 0;
   }
   inputCloseUsername.value = inputClosePin.value = '';
+});
+
+///now we need to set sort = true whenever a person clicks on the sort button
+///if we click on the buttton again it does not go back to normal. We change this by using a state variable which will monitor if we are currently sorting the array or not
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 ///let's loop over the array, take the first letter of each element and then put them together into a new array
@@ -614,6 +626,7 @@ const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 */
 
+/*
 ///FLAT AND FLATMAP
 
 ///What if we wanted to take all these elements in the separate and put all of these together in just one big array
@@ -648,3 +661,33 @@ const overalBalance2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overalBalance2);
+*/
+
+///SORTING ARRAYS
+
+///With strings
+const owners = ['Erik', 'Fede', 'Fabi', 'Brenda'];
+console.log(owners.sort()); ///we get our array sorted automatically from A to Z. This actually mutate our original array
+console.log(owners);
+
+//With numbers
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements);
+console.log(movements.sort()); ///this is not the result we are expecting because these numbers are not at all ordered in any way. The reason for this is that the sort method does the sorting based on strings. We can fix this by passing in a compare callback function into the sort method. This callback function is called with two arguments(the current and the sort value)
+/// RETURN < 0, A, B (keep order)
+/// RETURN > 0, B, A (switch order)
+///ascending order
+movements.sort((a, b) => {
+  if (a > b) return 1; ///means to switch the order
+  if (b > a) return -1;
+});
+console.log(movements);
+
+movements.sort((a, b) => a - b);
+console.log(movements);
+///descending order
+movements.sort((a, b) => {
+  if (a > b) return -1; ///means to switch the order
+  if (b > a) return 1;
+});
+console.log(movements);
