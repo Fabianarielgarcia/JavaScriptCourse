@@ -663,6 +663,7 @@ const overalBalance2 = accounts
 console.log(overalBalance2);
 */
 
+/*
 ///SORTING ARRAYS
 
 ///With strings
@@ -691,3 +692,52 @@ movements.sort((a, b) => {
   if (b > a) return 1;
 });
 console.log(movements);
+*/
+
+///MORE WAYS OF CREATING AND FILLING ARRAYS
+///we've been creating arrays like this:
+
+///EMPTY ARRAYS + FILL METHOD
+const arr = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+///In these examples we have our data so we could then manually create these arrays
+
+///We can actually generate arrays programmatically. The easiest one is to again, use the array() constructor function
+
+///When we pass one argument to the array constructor then it creates a new empty argument with that length. We can only use one method in this array and that method is thr fill() method. This method mutates the actual array.
+
+///FILL METHOD: besides the value that we want to fill the array with, we can also specify where we want it to start to fill
+
+const x = new Array(7);
+console.log(x);
+//x.fill(1);--->output-->[1, 1, 1, 1, 1, 1, 1]
+//x.fill(1, 3); //output-->[empty x 3, 1, 1, 1, 1]
+x.fill(1, 3, 5); //output-->[empty x 3, 1, 1, empty x 2]
+console.log(x);
+
+///we can also fill arrays that are not empty
+arr.fill(23, 2, 6);
+console.log(arr);
+
+///ARRAY.FROM() FUNCTION
+///we are not using the from method on an array, instead we are using it on the Array() constructor.
+
+//first argument: an object with the length, second argument: a mapping function, exactly like the call back function that we pass into the map() method
+const y = Array.from({ length: 7 }, () => 1); ///recreating the array fill with seven 1
+console.log(y);
+
+///let's create the intial array from 1 to 7. We put the underscore to show other programmenrs taht we only need to use the second parameter
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+///1) We use Array.from() to create an array from the result of document.querySelectorAll() which is a nodeList, which is not really an array, but an array like structure that can easily be converted to ana array
+//2) We included a mapping function which then forms that initial array to an array exactly as we want it
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+
+  console.log(movementsUI);
+});
