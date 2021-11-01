@@ -820,3 +820,65 @@ BASED ON ACCUMULATOR:
 BASED ON CALLBACK:
 .FOREACH()
 */
+
+////ARRAY METHODS PRACTICE
+
+///1. Calculate how much money was deposit in total in the bank
+
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+console.log(bankDepositSum);
+
+///2.Count how many deposits there have been in the bank with at least $1.000
+
+///option 1
+/*
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov >= 1000).length;
+console.log(numDeposits1000);
+*/
+
+///option 2
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+///(cur >= 1000 ? count + 1 : count)
+console.log(numDeposits1000);
+
+///3.Create an object which contains the sum of the deposits and of the withdrawals
+
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(deposits, withdrawals);
+
+//4.Create a simple function to convert any string to a title case
+///this is a nice title ->? This Is a Nice Title
+
+const convertTitlecase = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+  const exceptions = ['a', 'and', 'an', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLocaleLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+  ///Logic: if the current word is included in the exceptions array then simply return that word. If not, then capitalize it
+  return capitalize(titleCase);
+};
+
+console.log(convertTitlecase('this is a nice title'));
+console.log(convertTitlecase('this is a LONG title but not too long'));
+console.log(convertTitlecase('and here is another title with a EXAMPLE'));
