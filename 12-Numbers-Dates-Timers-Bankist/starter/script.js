@@ -292,6 +292,7 @@ console.log(Number.isInteger(23.0)); //true
 console.log(Number.isInteger(23 / 0)); //false
 */
 
+/*
 ///MATH AND ROUNDING
 
 /// Square root (raiz cuadrada)
@@ -350,3 +351,28 @@ console.log((2.7).toFixed(0)); /// 3
 console.log((2.7).toFixed(3)); /// 2.700, it adds 0 until it has exactly three decimal parts
 console.log((2.345).toFixed(2)); //2.35
 console.log(+(2.345).toFixed(2)); //2.35
+*/
+
+///THE REMINDER OPERATOR
+//The reminder operator has some special use cases. It simply returns the reminder of a division
+
+console.log(5 % 2); // 1 (reminder)
+console.log(5 / 2); // 5 = 2 * 2 + 1 ( reminder)
+console.log(8 % 3); // 2
+
+///check if a certain number is even or odd
+console.log(6 % 2); // 0
+console.log(7 % 2); // 1
+
+const isEven = n => n % 2 === 0;
+console.log(isEven(8));
+console.log(isEven(23));
+console.log(isEven(514));
+
+///Let's paint our even rows orange and blue
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    if (i % 2 === 0) row.style.backgroundColor = 'orangered';
+    if (i % 3 === 0) row.style.backgroundColor = 'blue';
+  });
+});
