@@ -94,7 +94,7 @@ const displayMovements = function (movements, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}€</div>
+        <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
 
@@ -104,19 +104,19 @@ const displayMovements = function (movements, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance}€`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes}€`;
+  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out)}€`;
+  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -126,7 +126,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 const createUsernames = function (accs) {
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = +inputLoanAmount.value;
+  const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -252,6 +252,7 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 // LECTURES
 
+/*
 ////CONVERTING AND CHECKING NUMBERS
 
 ///All numbers in JavaScript are represented internally as floating numbers.
@@ -289,3 +290,63 @@ console.log(Number.isFinite(23 / 0)); //false
 console.log(Number.isInteger(23)); //true
 console.log(Number.isInteger(23.0)); //true
 console.log(Number.isInteger(23 / 0)); //false
+*/
+
+///MATH AND ROUNDING
+
+/// Square root (raiz cuadrada)
+console.log(Math.sqrt(25)); // 5
+console.log(25 ** (1 / 2)); // 5
+console.log(8 ** (1 / 3)); // 2
+
+///get the maximum value of a coule of values
+console.log(Math.max(5, 2, 23, 25, 10)); //25
+console.log(Math.max(5, 2, 23, '25', 10)); // 25
+
+console.log(Math.max(5, 2, 23, '25px', 10)); // NaN;
+console.log(Math.max(5, 2, 23, 25, '10x')); // NaN
+
+///get the minimum value of a coule of values
+console.log(Math.min(5, 2, 23, 25, 10)); // 29
+
+///constants on the math object
+console.log(Math.PI * Number.parseFloat('10px') ** 2); ///el area de un circulo con la constante PI
+
+//random() function
+console.log(Math.trunc(Math.random() * 6) + 1);
+
+//lets generalize this formula to always get two different random numbers between two numbers
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min) + 1) + min;
+
+//console.log(randomInt(10, 20));
+
+///Rounding Integers
+//Math.trunc(): it removes any decimal part
+console.log(Math.trunc(23.3));
+console.log(Math.trunc('23.3'));
+
+///Math.round(): it rounds to the nearest Integer
+console.log(Math.round(23.3)); // 23
+console.log(Math.round(23.9)); // 24
+
+///Math.ceil(): it rounds up
+console.log(Math.ceil(23.3)); // 24
+console.log(Math.ceil(23.9)); // 24
+
+//Math.floor(): it rounds down
+console.log(Math.floor(23.3)); // 23
+console.log(Math.floor(23.9)); // 23
+
+///Trunc and floor do the same when working with positive numbers. However, they do not function in the same way when working with negative numbers
+
+console.log(Math.trunc(-23.3)); // -23
+console.log(Math.floor(-23.3)); // -24
+
+///Rounding decimals
+//toFixed() method: this method will always return a string instead of a number
+console.log((2.7).toFixed(0)); /// 3
+console.log((2.7).toFixed(3)); /// 2.700, it adds 0 until it has exactly three decimal parts
+console.log((2.345).toFixed(2)); //2.35
+console.log(+(2.345).toFixed(2)); //2.35
