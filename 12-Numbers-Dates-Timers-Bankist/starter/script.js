@@ -164,7 +164,7 @@ btnLogin.addEventListener('click', function (e) {
   );
   console.log(currentAccount);
 
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+  if (currentAccount?.pin === +inputLoginPin.value) {
     // Display UI and message
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
@@ -182,7 +182,7 @@ btnLogin.addEventListener('click', function (e) {
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -223,7 +223,7 @@ btnClose.addEventListener('click', function (e) {
 
   if (
     inputCloseUsername.value === currentAccount.username &&
-    Number(inputClosePin.value) === currentAccount.pin
+    +inputClosePin.value === currentAccount.pin
   ) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
@@ -251,3 +251,41 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+////CONVERTING AND CHECKING NUMBERS
+
+///All numbers in JavaScript are represented internally as floating numbers.
+console.log(23 === 23.0); ///output-> true
+
+console.log(0.1 + 0.2); ///->0.3000004
+console.log(0.1 + 0.2 === 0.3); //false
+
+///convert a string into a number
+console.log(Number('23'));
+console.log(+'23'); //when JavaScript sees the plus symbol it will do type coercion
+
+///Parsing: in order to this to function, the string needs to start with a number
+console.log(Number.parseInt('30px', 10)); //output-> 30
+console.log(Number.parseInt('a30', 10)); //->output NaN
+
+console.log(Number.parseFloat('2.5rem')); //output-> 2.5
+console.log(Number.parseInt('2.5rem')); //output-> 2, we only get the integer part
+
+///the parseInt() function actually accepts a second argument, which is the so-called regex (the base of the numeral system that we are using)
+
+///isNaN(): check if value NaN
+console.log(Number.isNaN(20)); //output->false because 20 is a number
+console.log(Number.isNaN('20')); //output->false, because it is a regular value
+console.log(Number.isNaN(+'20X')); //output-> true
+console.log(Number.isNaN(23 / 0)); //output->false, infinity is also NaN
+
+//isFinite(): better way to check if a value is a number
+console.log(Number.isFinite(20)); // true
+console.log(Number.isFinite('20')); // false
+console.log(Number.isFinite(+'20X')); //false
+console.log(Number.isFinite(23 / 0)); //false
+
+///isInteger()
+console.log(Number.isInteger(23)); //true
+console.log(Number.isInteger(23.0)); //true
+console.log(Number.isInteger(23 / 0)); //false
