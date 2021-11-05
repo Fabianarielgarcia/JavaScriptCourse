@@ -353,6 +353,7 @@ console.log((2.345).toFixed(2)); //2.35
 console.log(+(2.345).toFixed(2)); //2.35
 */
 
+/*
 ///THE REMINDER OPERATOR
 //The reminder operator has some special use cases. It simply returns the reminder of a division
 
@@ -376,3 +377,43 @@ labelBalance.addEventListener('click', function () {
     if (i % 3 === 0) row.style.backgroundColor = 'blue';
   });
 });
+*/
+
+///WORKKING WITH BIGINT
+///Is a special type of integers. Whe indicate that we are using a big integer by adding a 'n' at the end of the number. We can´t mix BigInt with regular numbers
+
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+
+console.log(4444444444566666666666455132n);
+console.log(BigInt(444444444456));
+
+///Operations
+console.log(10000n + 10000n);
+console.log(55542163241634163411541n * 54135416541351653411n);
+
+///Math operations are not allow with BigInt
+///console.log(Math.sqrt(16n));///error
+const huge = 221135416531534163513103n;
+const num = 23;
+//console.log(huge * num); ///error
+console.log(huge * BigInt(num));
+
+///There are two exceptions to this which are the comparison operators and the plus operator when working eith strings
+
+///Exception
+console.log(20n > 15); ///true
+console.log(20n === 20); ///false because when we use the triple operator JavaScript does not do type coercion, and these two values have different type (a regular number and a BigInt)
+console.log(typeof 20n);
+console.log(20n == 20); ///true
+
+//huge (BigInt) is converted to a string
+console.log(huge + 'is REALLY big!!!');
+
+///Dvisions
+console.log(10n / 3n); ///3n, it returns the closest BigInt, and the decimal part is cut
+console.log(10 / 3);
