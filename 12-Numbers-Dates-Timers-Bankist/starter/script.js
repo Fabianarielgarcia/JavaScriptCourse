@@ -379,6 +379,7 @@ labelBalance.addEventListener('click', function () {
 });
 */
 
+/*
 ///WORKKING WITH BIGINT
 ///Is a special type of integers. Whe indicate that we are using a big integer by adding a 'n' at the end of the number. We can´t mix BigInt with regular numbers
 
@@ -417,3 +418,62 @@ console.log(huge + 'is REALLY big!!!');
 ///Dvisions
 console.log(10n / 3n); ///3n, it returns the closest BigInt, and the decimal part is cut
 console.log(10 / 3);
+*/
+
+///CREATING DATES
+//Date and time can be a little be messy and confusing in JavaScript
+
+///We need to actually create a date
+/*
+///first way:to sumply use the new date constructor
+const now = new Date();
+console.log(now);
+
+///second way: to parse the date from a date string
+console.log(new Date('Fri Nov 05 2021 17:41:24'));
+///we can also write a string ourselves. However, it is not a good idea to do this because it can be quite unreliable. If the string was created by JavaScript, then of course it is pretty safe
+console.log(new Date('December 24, 2015'));
+console.log(new Date(account1.movementsDates[0]));
+
+///we can also pass year, day, hours, minutes and even seconds in this constructor
+console.log(new Date(2017, 10, 19, 15, 23, 5)); ///output-> Sun Nov 19 2017 15:23:05 GMT-0300 (The month is zero based second parameter = 10 = Nov )
+
+///JavaScript automatically corrects the date as November does not have 31 days, it corrects to December the first
+console.log(new Date(2017, 10, 31));
+
+//we can also pass into the  date constructor function, the amount of miliseconds passed since the beginning of the unix time, which is January 1, 1970
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+///Date's methods
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+
+///getFullYear()
+console.log(future.getFullYear()); //2037
+//getMonth()
+console.log(future.getMonth()); //10 (Nov)
+///getDay()
+console.log(future.getDate()); //19
+//getDat()
+console.log(future.getDay()); //4 (day of the week)
+///getHours()
+console.log(future.getHours());
+//getMinutes()
+console.log(future.getMinutes());
+//get Seconds()
+console.log(future.getSeconds());
+///toISOString(): get a formated string
+console.log(future.toISOString());
+//get timestamp(): miliseconds which have passed dince January 1, 1970
+console.log(future.getTime()); //2142267780000
+///we can reverse the number that we got above
+console.log(new Date(2142267780000));
+
+///get the timestamp from right now
+console.log(Date.now());
+
+///Set data to the time
+future.setFullYear(2040);
+console.log(future);
+*/
