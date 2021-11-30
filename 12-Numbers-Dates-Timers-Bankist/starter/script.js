@@ -86,7 +86,7 @@ const formatMovementsDate = function (date, locale) {
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
   const daysPassed = calcDaysPassed(new Date(), date);
-  console.log(daysPassed);
+  ///console.log(daysPassed);
 
   if (daysPassed === 0) return 'Today';
   if (daysPassed === 1) return 'Yesterday';
@@ -279,12 +279,14 @@ btnLoan.addEventListener('click', function (e) {
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
-    currentAccount.movements.push(amount);
+    setTimeout(function () {
+      currentAccount.movements.push(amount);
 
-    ///Add loan date
-    currentAccount.movementsDates.push(new Date().toISOString());
-    // Update UI
-    updateUI(currentAccount);
+      ///Add loan date
+      currentAccount.movementsDates.push(new Date().toISOString());
+      // Update UI
+      updateUI(currentAccount);
+    }, 2500);
   }
   inputLoanAmount.value = '';
 });
@@ -569,6 +571,7 @@ const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 4));
 console.log(days1);
 */
 
+/*
 ///INTERNATIONALIZING NUMBERS (INTL)
 const num = 3884764.23;
 
@@ -591,3 +594,31 @@ console.log(
   navigator.language,
   new Intl.NumberFormat(navigator.language, options).format(num)
 );
+*/
+
+///TIMERS:SETTIMEOUT AND SETINTERVAL
+
+/// SETTIMEOUT timer runs just once after a defined time, while the SETINTERVAL timer keeps running basically forever, until we stop it.
+
+///let´s use settimeout to simulate ordering a pizza
+///first parameter: a callback function
+///second parameter: the amount of milliseconds that will pass until this function is called
+
+const ingredients = ['olives', 'spinach'];
+
+const pizzaTimer = setTimeout(() => console.log('Here is your pizza 🍕'), 3000);
+console.log('Waiting');
+///everything that comes after the milisecinds are the parameters used in the callback function
+setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza  with ${ing1} and ${ing2}🍕`),
+  3000,
+  ...ingredients
+);
+///this conditional is executed to delete the setTimeout
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+
+///SETINTERVAL
+setInterval(function () {
+  const now = new Date();
+  console.log(now);
+}, 5000);
